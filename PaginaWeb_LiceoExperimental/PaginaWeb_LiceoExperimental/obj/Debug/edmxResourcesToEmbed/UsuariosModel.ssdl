@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UsuariosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Genero">
+    <Key>
+      <PropertyRef Name="GeneroID" />
+    </Key>
+    <Property Name="GeneroID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IdentificadorPersona">
+    <Key>
+      <PropertyRef Name="IdentificadorPersonaID" />
+    </Key>
+    <Property Name="IdentificadorPersonaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valor" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FechaVencimiento" Type="date" />
+    <Property Name="PersonaID" Type="bigint" Nullable="false" />
+    <Property Name="TipoIdentificadorPersonaID" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MecanismoDeContacto">
+    <Key>
+      <PropertyRef Name="MecanismoDeContactoID" />
+    </Key>
+    <Property Name="MecanismoDeContactoID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valor" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Prioridad" Type="tinyint" Nullable="false" />
+    <Property Name="PersonaID" Type="bigint" Nullable="false" />
+    <Property Name="TipoMecanismoDeContactoID" Type="tinyint" Nullable="false" />
+    <Property Name="TipoDeTelefonoID" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Nacionalidad">
+    <Key>
+      <PropertyRef Name="NacionalidadID" />
+    </Key>
+    <Property Name="NacionalidadID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="PersonaID" />
+    </Key>
+    <Property Name="PersonaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PrimerNombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PrimerApellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="SegundoApellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="SegundoNombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="FechaNacimiento" Type="date" />
+    <Property Name="LugarNacimiento" Type="nvarchar" MaxLength="100" />
+    <Property Name="GeneroID" Type="tinyint" />
+    <Property Name="NacionalidadID" Type="tinyint" />
+    <Property Name="ParticipanteID" Type="int" />
+  </EntityType>
+  <EntityType Name="TipoDeTelefono">
+    <Key>
+      <PropertyRef Name="TipoDeTelefonoID" />
+    </Key>
+    <Property Name="TipoDeTelefonoID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoIdentificadorPersona">
+    <Key>
+      <PropertyRef Name="TipoIdentificadorPersonaID" />
+    </Key>
+    <Property Name="TipoIdentificadorPersonaID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoMecanismoDeContacto">
+    <Key>
+      <PropertyRef Name="TipoMecanismoDeContactoID" />
+    </Key>
+    <Property Name="TipoMecanismoDeContactoID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioID" />
+    </Key>
+    <Property Name="UsuarioID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CorreoElectronico" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contrasenna" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Rol" Type="tinyint" Nullable="false" />
+    <Property Name="Becado" Type="bit" Nullable="false" />
+    <Property Name="Permisos" Type="bit" Nullable="false" />
+    <Property Name="PersonaID" Type="bigint" />
+  </EntityType>
+  <Association Name="FK__Usuario__FK_Pers__2FCF1A8A">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdentificadorPersona_Persona">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="IdentificadorPersona" Type="Self.IdentificadorPersona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="IdentificadorPersona">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdentificadorPersona_TipoIdentificadorPersona">
+    <End Role="TipoIdentificadorPersona" Type="Self.TipoIdentificadorPersona" Multiplicity="1" />
+    <End Role="IdentificadorPersona" Type="Self.IdentificadorPersona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoIdentificadorPersona">
+        <PropertyRef Name="TipoIdentificadorPersonaID" />
+      </Principal>
+      <Dependent Role="IdentificadorPersona">
+        <PropertyRef Name="TipoIdentificadorPersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_Persons">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_TipoDeTelefono">
+    <End Role="TipoDeTelefono" Type="Self.TipoDeTelefono" Multiplicity="0..1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDeTelefono">
+        <PropertyRef Name="TipoDeTelefonoID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="TipoDeTelefonoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_TipoMecanismoDeContacto">
+    <End Role="TipoMecanismoDeContacto" Type="Self.TipoMecanismoDeContacto" Multiplicity="1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMecanismoDeContacto">
+        <PropertyRef Name="TipoMecanismoDeContactoID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="TipoMecanismoDeContactoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Genero">
+    <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genero">
+        <PropertyRef Name="GeneroID" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="GeneroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Nacionalidad">
+    <End Role="Nacionalidad" Type="Self.Nacionalidad" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nacionalidad">
+        <PropertyRef Name="NacionalidadID" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="NacionalidadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ActualizarBeca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="BuscarEstudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ConsultarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Correo" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ConsultarUsuario_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EliminarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UsuarioID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Ingresar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Correo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Contra" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Insertar_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CorreoElectronico" Type="nvarchar" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Contrasena" Type="nvarchar" Mode="In" />
+    <Parameter Name="Rol" Type="tinyint" Mode="In" />
+    <Parameter Name="Becado" Type="bit" Mode="In" />
+    <Parameter Name="Permisos" Type="bit" Mode="In" />
+    <Parameter Name="PrimerN" Type="nvarchar" Mode="In" />
+    <Parameter Name="PrimerA" Type="nvarchar" Mode="In" />
+    <Parameter Name="SegundoN" Type="nvarchar" Mode="In" />
+    <Parameter Name="SegundoA" Type="nvarchar" Mode="In" />
+    <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+    <Parameter Name="LugarNacimiento" Type="nvarchar" Mode="In" />
+    <Parameter Name="GeneroID" Type="tinyint" Mode="In" />
+    <Parameter Name="Nacionalidad" Type="tinyint" Mode="In" />
+    <Parameter Name="ValorID" Type="nvarchar" Mode="In" />
+    <Parameter Name="TipoID" Type="tinyint" Mode="In" />
+    <Parameter Name="ValorContacto" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ListarBecados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarEstudiantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarEstudiantesID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ListarEstudiantesNombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ListarNoBecados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarNoBecadosID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ListarNoBecadosNombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ListarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ModificarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UsuarioID" Type="bigint" Mode="In" />
+    <Parameter Name="CorreoElectronico" Type="nvarchar" Mode="In" />
+    <Parameter Name="NombreUsuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="Contrasenna" Type="nvarchar" Mode="In" />
+    <Parameter Name="Rol" Type="tinyint" Mode="In" />
+    <Parameter Name="Becado" Type="bit" Mode="In" />
+    <Parameter Name="Permisos" Type="bit" Mode="In" />
+    <Parameter Name="PrimerNombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="PrimerApellido" Type="nvarchar" Mode="In" />
+    <Parameter Name="SegundoApellido" Type="nvarchar" Mode="In" />
+    <Parameter Name="SegundoNombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+    <Parameter Name="LugarNacimiento" Type="nvarchar" Mode="In" />
+    <Parameter Name="GeneroID" Type="tinyint" Mode="In" />
+    <Parameter Name="Nacionalidad" Type="tinyint" Mode="In" />
+    <Parameter Name="ValorID" Type="nvarchar" Mode="In" />
+    <Parameter Name="TipoID" Type="tinyint" Mode="In" />
+    <Parameter Name="ValorContacto" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="UsuariosModelStoreContainer">
+    <EntitySet Name="Genero" EntityType="Self.Genero" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="IdentificadorPersona" EntityType="Self.IdentificadorPersona" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="MecanismoDeContacto" EntityType="Self.MecanismoDeContacto" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="Nacionalidad" EntityType="Self.Nacionalidad" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="Persona" EntityType="Self.Persona" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="TipoDeTelefono" EntityType="Self.TipoDeTelefono" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="TipoIdentificadorPersona" EntityType="Self.TipoIdentificadorPersona" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="TipoMecanismoDeContacto" EntityType="Self.TipoMecanismoDeContacto" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="DatosUsuario" store:Type="Tables" />
+    <AssociationSet Name="FK__Usuario__FK_Pers__2FCF1A8A" Association="Self.FK__Usuario__FK_Pers__2FCF1A8A">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdentificadorPersona_Persona" Association="Self.FK_IdentificadorPersona_Persona">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="IdentificadorPersona" EntitySet="IdentificadorPersona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdentificadorPersona_TipoIdentificadorPersona" Association="Self.FK_IdentificadorPersona_TipoIdentificadorPersona">
+      <End Role="TipoIdentificadorPersona" EntitySet="TipoIdentificadorPersona" />
+      <End Role="IdentificadorPersona" EntitySet="IdentificadorPersona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_Persons" Association="Self.FK_MecanismoDeContacto_Persons">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_TipoDeTelefono" Association="Self.FK_MecanismoDeContacto_TipoDeTelefono">
+      <End Role="TipoDeTelefono" EntitySet="TipoDeTelefono" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_TipoMecanismoDeContacto" Association="Self.FK_MecanismoDeContacto_TipoMecanismoDeContacto">
+      <End Role="TipoMecanismoDeContacto" EntitySet="TipoMecanismoDeContacto" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Genero" Association="Self.FK_Persona_Genero">
+      <End Role="Genero" EntitySet="Genero" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Nacionalidad" Association="Self.FK_Persona_Nacionalidad">
+      <End Role="Nacionalidad" EntitySet="Nacionalidad" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

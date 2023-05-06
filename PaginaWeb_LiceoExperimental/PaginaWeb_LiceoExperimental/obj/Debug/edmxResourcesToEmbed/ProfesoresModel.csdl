@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProfesoresModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Profesores">
+    <Key>
+      <PropertyRef Name="ProfesorID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="ProfesorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FK_Persona_ID" Type="Int64" />
+    <Property Name="PrimerNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SegundoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Contacto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Seccion" Relationship="Self.FK_Seccion_Profesores" FromRole="Profesores" ToRole="Seccion" />
+  </EntityType>
+  <EntityType Name="Seccion">
+    <Key>
+      <PropertyRef Name="SeccionID" />
+    </Key>
+    <Property Name="SeccionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ProfesorID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Profesores" Relationship="Self.FK_Seccion_Profesores" FromRole="Seccion" ToRole="Profesores" />
+  </EntityType>
+  <Association Name="FK_Seccion_Profesores">
+    <End Role="Profesores" Type="Self.Profesores" Multiplicity="1" />
+    <End Role="Seccion" Type="Self.Seccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesores">
+        <PropertyRef Name="ProfesorID" />
+      </Principal>
+      <Dependent Role="Seccion">
+        <PropertyRef Name="ProfesorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProfesoresEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Profesores" EntityType="Self.Profesores" />
+    <EntitySet Name="Seccion" EntityType="Self.Seccion" />
+    <AssociationSet Name="FK_Seccion_Profesores" Association="Self.FK_Seccion_Profesores">
+      <End Role="Profesores" EntitySet="Profesores" />
+      <End Role="Seccion" EntitySet="Seccion" />
+    </AssociationSet>
+    <FunctionImport Name="AgregarProfesor">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+      <Parameter Name="PrimerNombre" Mode="In" Type="String" />
+      <Parameter Name="SegundoNombre" Mode="In" Type="String" />
+      <Parameter Name="PrimerApellido" Mode="In" Type="String" />
+      <Parameter Name="SegundoApellido" Mode="In" Type="String" />
+      <Parameter Name="Contacto" Mode="In" Type="String" />
+      <Parameter Name="NumeroTelefono" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AgregarSeccion">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Profesor" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarProfesor_ID" ReturnType="Collection(ProfesoresModel.ConsultarProfesor_ID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarProfesor_Nombre" ReturnType="Collection(ProfesoresModel.ConsultarProfesor_Nombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarSeccion_Descripcion" ReturnType="Collection(ProfesoresModel.ConsultarSeccion_Descripcion_Result)">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarProfesor">
+      <Parameter Name="ProfesorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ListarProfesor_PorNombre" ReturnType="Collection(ProfesoresModel.ListarProfesor_PorNombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarProfesores" ReturnType="Collection(ProfesoresModel.ListarProfesores_Result)" />
+    <FunctionImport Name="ListarSecciones" ReturnType="Collection(ProfesoresModel.ListarSecciones_Result)" />
+    <FunctionImport Name="ConsultarSeccion_ID" ReturnType="Collection(ProfesoresModel.ConsultarSeccion_ID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarSeccion">
+      <Parameter Name="SeccionID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ModificarProfesor">
+      <Parameter Name="ProfesorID" Mode="In" Type="Int32" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+      <Parameter Name="PrimerNombre" Mode="In" Type="String" />
+      <Parameter Name="SegundoNombre" Mode="In" Type="String" />
+      <Parameter Name="PrimerApellido" Mode="In" Type="String" />
+      <Parameter Name="SegundoApellido" Mode="In" Type="String" />
+      <Parameter Name="Contacto" Mode="In" Type="String" />
+      <Parameter Name="NumeroTelefono" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ModificarSeccion">
+      <Parameter Name="SeccionID" Mode="In" Type="Int32" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Profesor" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ConsultarProfesor_ID_Result">
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="2000" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contacto" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="NumeroTelefono" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Seccion" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+  </ComplexType>
+  <ComplexType Name="ConsultarProfesor_Nombre_Result">
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="2000" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contacto" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="NumeroTelefono" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Seccion" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+  </ComplexType>
+  <ComplexType Name="ConsultarSeccion_Descripcion_Result">
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="SeccionID" Nullable="false" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+  </ComplexType>
+  <ComplexType Name="ListarProfesor_PorNombre_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ListarProfesores_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ListarSecciones_Result">
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="SeccionID" Nullable="false" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+  </ComplexType>
+  <ComplexType Name="ConsultarSeccion_ID_Result">
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="SeccionID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="DecripcionProfesor" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="Contacto" Nullable="true" MaxLength="100" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="NumeroTelefono" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+  </ComplexType>
+</Schema>

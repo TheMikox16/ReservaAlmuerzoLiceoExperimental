@@ -1,0 +1,1427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PaginaWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CategoriaPlatillo">
+    <Key>
+      <PropertyRef Name="CategoriaPlatilloID" />
+    </Key>
+    <Property Name="CategoriaPlatilloID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CategoriaPlatilloPadreID" Type="Int32" Nullable="false" />
+    <Property Name="PlatilloID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CategoriaPlatillo1" Relationship="Self.FK_CategoriaPlatillo_CategoriaPlatilloPadre" FromRole="CategoriaPlatillo" ToRole="CategoriaPlatillo1" />
+    <NavigationProperty Name="CategoriaPlatillo2" Relationship="Self.FK_CategoriaPlatillo_CategoriaPlatilloPadre" FromRole="CategoriaPlatillo1" ToRole="CategoriaPlatillo" />
+    <NavigationProperty Name="Platillo" Relationship="Self.FK_Platillo_Reserva" FromRole="CategoriaPlatillo" ToRole="Platillo" />
+  </EntityType>
+  <EntityType Name="Moneda">
+    <Key>
+      <PropertyRef Name="MonedaID" />
+    </Key>
+    <Property Name="MonedaID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ISOALPHA2" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ISOALPHA3" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PrecioID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Precio" Relationship="Self.FK_Precio_Moneda" FromRole="Moneda" ToRole="Precio" />
+    <NavigationProperty Name="TipoCambio" Relationship="Self.FK_TipoCambio_MonedaDestinoID" FromRole="Moneda" ToRole="TipoCambio" />
+    <NavigationProperty Name="TipoCambio1" Relationship="Self.FK_TipoCambio_MonedaOrigenID" FromRole="Moneda" ToRole="TipoCambio" />
+  </EntityType>
+  <EntityType Name="Platillo">
+    <Key>
+      <PropertyRef Name="PlatilloID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="PlatilloID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <Property Name="Fotografia" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="PrecioID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CategoriaPlatillo" Relationship="Self.FK_Platillo_Reserva" FromRole="Platillo" ToRole="CategoriaPlatillo" />
+    <NavigationProperty Name="PlatilloDia" Relationship="Self.FK_Platillo_PlatilloDia" FromRole="Platillo" ToRole="PlatilloDia" />
+    <NavigationProperty Name="Precio" Relationship="Self.FK_Precio_Platillo" FromRole="Platillo" ToRole="Precio" />
+  </EntityType>
+  <EntityType Name="PlatilloDia">
+    <Key>
+      <PropertyRef Name="PlatilloDiaID" />
+    </Key>
+    <Property Name="PlatilloDiaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="PlatilloID" Type="Int32" />
+    <NavigationProperty Name="Platillo" Relationship="Self.FK_Platillo_PlatilloDia" FromRole="PlatilloDia" ToRole="Platillo" />
+    <NavigationProperty Name="Reserva" Relationship="Self.FK_PlatilloDia_Reserva" FromRole="PlatilloDia" ToRole="Reserva" />
+  </EntityType>
+  <EntityType Name="Precio">
+    <Key>
+      <PropertyRef Name="PrecioID" />
+    </Key>
+    <Property Name="PrecioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Valor" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Moneda" Relationship="Self.FK_Precio_Moneda" FromRole="Precio" ToRole="Moneda" />
+    <NavigationProperty Name="Platillo" Relationship="Self.FK_Precio_Platillo" FromRole="Precio" ToRole="Platillo" />
+  </EntityType>
+  <EntityType Name="Reserva">
+    <Key>
+      <PropertyRef Name="ReservaID" />
+    </Key>
+    <Property Name="ReservaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="PersonaID" Type="Int64" Nullable="false" />
+    <Property Name="PlatilloDiaID" Type="Int64" Nullable="false" />
+    <Property Name="Estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PlatilloDia" Relationship="Self.FK_PlatilloDia_Reserva" FromRole="Reserva" ToRole="PlatilloDia" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_Reserva" FromRole="Reserva" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="TipoCambio">
+    <Key>
+      <PropertyRef Name="TipoCambioID" />
+    </Key>
+    <Property Name="TipoCambioID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MontoCompra" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="MontoVenta" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="MonedaOrigenID" Type="Byte" Nullable="false" />
+    <Property Name="MonedaDestinoID" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Moneda" Relationship="Self.FK_TipoCambio_MonedaDestinoID" FromRole="TipoCambio" ToRole="Moneda" />
+    <NavigationProperty Name="Moneda1" Relationship="Self.FK_TipoCambio_MonedaOrigenID" FromRole="TipoCambio" ToRole="Moneda" />
+  </EntityType>
+  <EntityType Name="Genero">
+    <Key>
+      <PropertyRef Name="GeneroID" />
+    </Key>
+    <Property Name="GeneroID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_Genero" FromRole="Genero" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="IdentificadorPersona">
+    <Key>
+      <PropertyRef Name="IdentificadorPersonaID" />
+    </Key>
+    <Property Name="IdentificadorPersonaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Valor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FechaVencimiento" Type="DateTime" Precision="0" />
+    <Property Name="PersonaID" Type="Int64" Nullable="false" />
+    <Property Name="TipoIdentificadorPersonaID" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_IdentificadorPersona_Persona" FromRole="IdentificadorPersona" ToRole="Persona" />
+    <NavigationProperty Name="TipoIdentificadorPersona" Relationship="Self.FK_IdentificadorPersona_TipoIdentificadorPersona" FromRole="IdentificadorPersona" ToRole="TipoIdentificadorPersona" />
+  </EntityType>
+  <EntityType Name="MecanismoDeContacto">
+    <Key>
+      <PropertyRef Name="MecanismoDeContactoID" />
+    </Key>
+    <Property Name="MecanismoDeContactoID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Valor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Prioridad" Type="Byte" Nullable="false" />
+    <Property Name="PersonaID" Type="Int64" Nullable="false" />
+    <Property Name="TipoMecanismoDeContactoID" Type="Byte" Nullable="false" />
+    <Property Name="TipoDeTelefonoID" Type="Byte" />
+    <NavigationProperty Name="TipoDeTelefono" Relationship="Self.FK_MecanismoDeContacto_TipoDeTelefono" FromRole="MecanismoDeContacto" ToRole="TipoDeTelefono" />
+    <NavigationProperty Name="TipoMecanismoDeContacto" Relationship="Self.FK_MecanismoDeContacto_TipoMecanismoDeContacto" FromRole="MecanismoDeContacto" ToRole="TipoMecanismoDeContacto" />
+  </EntityType>
+  <EntityType Name="Nacionalidad">
+    <Key>
+      <PropertyRef Name="NacionalidadID" />
+    </Key>
+    <Property Name="NacionalidadID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_Nacionalidad" FromRole="Nacionalidad" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="PersonaID" />
+    </Key>
+    <Property Name="PersonaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PrimerNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SegundoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+    <Property Name="LugarNacimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="GeneroID" Type="Byte" />
+    <Property Name="NacionalidadID" Type="Byte" />
+    <Property Name="ParticipanteID" Type="Int32" />
+    <NavigationProperty Name="Reserva" Relationship="Self.FK_Persona_Reserva" FromRole="Persona" ToRole="Reserva" />
+    <NavigationProperty Name="Genero" Relationship="Self.FK_Persona_Genero" FromRole="Persona" ToRole="Genero" />
+    <NavigationProperty Name="IdentificadorPersona" Relationship="Self.FK_IdentificadorPersona_Persona" FromRole="Persona" ToRole="IdentificadorPersona" />
+    <NavigationProperty Name="Nacionalidad" Relationship="Self.FK_Persona_Nacionalidad" FromRole="Persona" ToRole="Nacionalidad" />
+    <NavigationProperty Name="Profesores" Relationship="Self.FK__Profesore__FK_Pe__640DD89F" FromRole="Persona" ToRole="Profesores" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__FK_Pers__2FCF1A8A" FromRole="Persona" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="TipoDeTelefono">
+    <Key>
+      <PropertyRef Name="TipoDeTelefonoID" />
+    </Key>
+    <Property Name="TipoDeTelefonoID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MecanismoDeContacto" Relationship="Self.FK_MecanismoDeContacto_TipoDeTelefono" FromRole="TipoDeTelefono" ToRole="MecanismoDeContacto" />
+  </EntityType>
+  <EntityType Name="TipoIdentificadorPersona">
+    <Key>
+      <PropertyRef Name="TipoIdentificadorPersonaID" />
+    </Key>
+    <Property Name="TipoIdentificadorPersonaID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="IdentificadorPersona" Relationship="Self.FK_IdentificadorPersona_TipoIdentificadorPersona" FromRole="TipoIdentificadorPersona" ToRole="IdentificadorPersona" />
+  </EntityType>
+  <EntityType Name="TipoMecanismoDeContacto">
+    <Key>
+      <PropertyRef Name="TipoMecanismoDeContactoID" />
+    </Key>
+    <Property Name="TipoMecanismoDeContactoID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MecanismoDeContacto" Relationship="Self.FK_MecanismoDeContacto_TipoMecanismoDeContacto" FromRole="TipoMecanismoDeContacto" ToRole="MecanismoDeContacto" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioID" />
+    </Key>
+    <Property Name="UsuarioID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contrasenna" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rol" Type="Byte" Nullable="false" />
+    <Property Name="Becado" Type="Boolean" Nullable="false" />
+    <Property Name="Permisos" Type="Boolean" Nullable="false" />
+    <Property Name="PersonaID" Type="Int64" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK__Usuario__FK_Pers__2FCF1A8A" FromRole="Usuario" ToRole="Persona" />
+    <NavigationProperty Name="Evento" Relationship="Self.FK_Evento_Usuario" FromRole="Usuario" ToRole="Evento" />
+    <NavigationProperty Name="LineaEvento" Relationship="Self.FK_LineaEvento_Usuario" FromRole="Usuario" ToRole="LineaEvento" />
+    <NavigationProperty Name="LineaNoticia" Relationship="Self.FK_LineaNoticia_Usuario" FromRole="Usuario" ToRole="LineaNoticia" />
+    <NavigationProperty Name="Noticia" Relationship="Self.FK_Noticia_Usuario" FromRole="Usuario" ToRole="Noticia" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Profesores">
+    <Key>
+      <PropertyRef Name="ProfesorID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="ProfesorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FK_Persona_ID" Type="Int64" />
+    <Property Name="PrimerNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SegundoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Contacto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK__Profesore__FK_Pe__640DD89F" FromRole="Profesores" ToRole="Persona" />
+    <NavigationProperty Name="Seccion" Relationship="Self.FK_Seccion_Profesores" FromRole="Profesores" ToRole="Seccion" />
+  </EntityType>
+  <EntityType Name="Seccion">
+    <Key>
+      <PropertyRef Name="SeccionID" />
+    </Key>
+    <Property Name="SeccionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ProfesorID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Profesores" Relationship="Self.FK_Seccion_Profesores" FromRole="Seccion" ToRole="Profesores" />
+  </EntityType>
+  <EntityType Name="Direccion">
+    <Key>
+      <PropertyRef Name="DireccionID" />
+    </Key>
+    <Property Name="DireccionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Linea1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Linea2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Prioridad" Type="Byte" Nullable="false" />
+    <Property Name="TipoDireccionID" Type="Byte" Nullable="false" />
+    <Property Name="UbicacionGeograficaID" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="TipoDireccion" Relationship="Self.FK_Direccion_TipoDireccion" FromRole="Direccion" ToRole="TipoDireccion" />
+    <NavigationProperty Name="UbicacionGeografica" Relationship="Self.FK_Direccion_UbicacionGeografica" FromRole="Direccion" ToRole="UbicacionGeografica" />
+  </EntityType>
+  <EntityType Name="Evento">
+    <Key>
+      <PropertyRef Name="EventoID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="EventoID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="LineaEventoID" Type="Int32" />
+    <Property Name="UsuarioID" Type="Int64" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Evento_Usuario" FromRole="Evento" ToRole="Usuario" />
+    <NavigationProperty Name="LineaEvento" Relationship="Self.FK_Evento_LineaEvento" FromRole="Evento" ToRole="LineaEvento" />
+    <NavigationProperty Name="Participante" Relationship="Self.FK_Participante_Evento" FromRole="Evento" ToRole="Participante" />
+  </EntityType>
+  <EntityType Name="LineaEvento">
+    <Key>
+      <PropertyRef Name="LineaEventoID" />
+    </Key>
+    <Property Name="LineaEventoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UsuarioID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_LineaEvento_Usuario" FromRole="LineaEvento" ToRole="Usuario" />
+    <NavigationProperty Name="Evento" Relationship="Self.FK_Evento_LineaEvento" FromRole="LineaEvento" ToRole="Evento" />
+  </EntityType>
+  <EntityType Name="Participante">
+    <Key>
+      <PropertyRef Name="ParticipanteID" />
+    </Key>
+    <Property Name="ParticipanteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EventoID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Evento" Relationship="Self.FK_Participante_Evento" FromRole="Participante" ToRole="Evento" />
+  </EntityType>
+  <EntityType Name="TipoDireccion">
+    <Key>
+      <PropertyRef Name="TipoDireccionID" />
+    </Key>
+    <Property Name="TipoDireccionID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Direccion" Relationship="Self.FK_Direccion_TipoDireccion" FromRole="TipoDireccion" ToRole="Direccion" />
+  </EntityType>
+  <EntityType Name="TipoUbicacionGeografica">
+    <Key>
+      <PropertyRef Name="TipoUbicacionGeograficaID" />
+    </Key>
+    <Property Name="TipoUbicacionGeograficaID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UbicacionGeografica" Relationship="Self.FK_UbicacionGeografica_TipoUbicacionGeografica" FromRole="TipoUbicacionGeografica" ToRole="UbicacionGeografica" />
+  </EntityType>
+  <EntityType Name="UbicacionGeografica">
+    <Key>
+      <PropertyRef Name="UbicacionGeograficaID" />
+    </Key>
+    <Property Name="UbicacionGeograficaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoUbicacionGeograficaID" Type="Byte" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UbicacionGeograficaPadreID" Type="Int16" />
+    <NavigationProperty Name="Direccion" Relationship="Self.FK_Direccion_UbicacionGeografica" FromRole="UbicacionGeografica" ToRole="Direccion" />
+    <NavigationProperty Name="TipoUbicacionGeografica" Relationship="Self.FK_UbicacionGeografica_TipoUbicacionGeografica" FromRole="UbicacionGeografica" ToRole="TipoUbicacionGeografica" />
+    <NavigationProperty Name="UbicacionGeografica1" Relationship="Self.FK_UbicacionGeografica_UbicacionGeograficaIDPadreID" FromRole="UbicacionGeografica" ToRole="UbicacionGeografica1" />
+    <NavigationProperty Name="UbicacionGeografica2" Relationship="Self.FK_UbicacionGeografica_UbicacionGeograficaIDPadreID" FromRole="UbicacionGeografica1" ToRole="UbicacionGeografica" />
+  </EntityType>
+  <EntityType Name="LineaNoticia">
+    <Key>
+      <PropertyRef Name="LineaNoticiaID" />
+    </Key>
+    <Property Name="LineaNoticiaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UsuarioID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_LineaNoticia_Usuario" FromRole="LineaNoticia" ToRole="Usuario" />
+    <NavigationProperty Name="Noticia" Relationship="Self.FK_Noticia_LineaNoticia" FromRole="LineaNoticia" ToRole="Noticia" />
+  </EntityType>
+  <EntityType Name="Noticia">
+    <Key>
+      <PropertyRef Name="NoticiaID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="NoticiaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Titulo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="LineaNoticiaID" Type="Int64" />
+    <Property Name="UsuarioID" Type="Int64" />
+    <Property Name="Archivo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Noticia_Usuario" FromRole="Noticia" ToRole="Usuario" />
+    <NavigationProperty Name="LineaNoticia" Relationship="Self.FK_Noticia_LineaNoticia" FromRole="Noticia" ToRole="LineaNoticia" />
+  </EntityType>
+  <EntityType Name="Prioridad">
+    <Key>
+      <PropertyRef Name="PrioridadID" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="PrioridadID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CategoriaPlatillo_CategoriaPlatilloPadre">
+    <End Role="CategoriaPlatillo" Type="Self.CategoriaPlatillo" Multiplicity="1" />
+    <End Role="CategoriaPlatillo1" Type="Self.CategoriaPlatillo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoriaPlatillo">
+        <PropertyRef Name="CategoriaPlatilloID" />
+      </Principal>
+      <Dependent Role="CategoriaPlatillo1">
+        <PropertyRef Name="CategoriaPlatilloPadreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platillo_Reserva">
+    <End Role="Platillo" Type="Self.Platillo" Multiplicity="1" />
+    <End Role="CategoriaPlatillo" Type="Self.CategoriaPlatillo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Platillo">
+        <PropertyRef Name="PlatilloID" />
+      </Principal>
+      <Dependent Role="CategoriaPlatillo">
+        <PropertyRef Name="PlatilloID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Precio_Moneda">
+    <End Role="Precio" Type="Self.Precio" Multiplicity="1" />
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Precio">
+        <PropertyRef Name="PrecioID" />
+      </Principal>
+      <Dependent Role="Moneda">
+        <PropertyRef Name="PrecioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TipoCambio_MonedaDestinoID">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
+    <End Role="TipoCambio" Type="Self.TipoCambio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="MonedaID" />
+      </Principal>
+      <Dependent Role="TipoCambio">
+        <PropertyRef Name="MonedaDestinoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TipoCambio_MonedaOrigenID">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
+    <End Role="TipoCambio" Type="Self.TipoCambio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="MonedaID" />
+      </Principal>
+      <Dependent Role="TipoCambio">
+        <PropertyRef Name="MonedaOrigenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platillo_PlatilloDia">
+    <End Role="Platillo" Type="Self.Platillo" Multiplicity="0..1" />
+    <End Role="PlatilloDia" Type="Self.PlatilloDia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Platillo">
+        <PropertyRef Name="PlatilloID" />
+      </Principal>
+      <Dependent Role="PlatilloDia">
+        <PropertyRef Name="PlatilloID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Precio_Platillo">
+    <End Role="Precio" Type="Self.Precio" Multiplicity="1" />
+    <End Role="Platillo" Type="Self.Platillo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Precio">
+        <PropertyRef Name="PrecioID" />
+      </Principal>
+      <Dependent Role="Platillo">
+        <PropertyRef Name="PrecioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlatilloDia_Reserva">
+    <End Role="PlatilloDia" Type="Self.PlatilloDia" Multiplicity="1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlatilloDia">
+        <PropertyRef Name="PlatilloDiaID" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="PlatilloDiaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Reserva">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Genero">
+    <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genero">
+        <PropertyRef Name="GeneroID" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="GeneroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdentificadorPersona_Persona">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="IdentificadorPersona" Type="Self.IdentificadorPersona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="IdentificadorPersona">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdentificadorPersona_TipoIdentificadorPersona">
+    <End Role="TipoIdentificadorPersona" Type="Self.TipoIdentificadorPersona" Multiplicity="1" />
+    <End Role="IdentificadorPersona" Type="Self.IdentificadorPersona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoIdentificadorPersona">
+        <PropertyRef Name="TipoIdentificadorPersonaID" />
+      </Principal>
+      <Dependent Role="IdentificadorPersona">
+        <PropertyRef Name="TipoIdentificadorPersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_TipoDeTelefono">
+    <End Role="TipoDeTelefono" Type="Self.TipoDeTelefono" Multiplicity="0..1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDeTelefono">
+        <PropertyRef Name="TipoDeTelefonoID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="TipoDeTelefonoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_TipoMecanismoDeContacto">
+    <End Role="TipoMecanismoDeContacto" Type="Self.TipoMecanismoDeContacto" Multiplicity="1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMecanismoDeContacto">
+        <PropertyRef Name="TipoMecanismoDeContactoID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="TipoMecanismoDeContactoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Nacionalidad">
+    <End Role="Nacionalidad" Type="Self.Nacionalidad" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nacionalidad">
+        <PropertyRef Name="NacionalidadID" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="NacionalidadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Profesore__FK_Pe__640DD89F">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+    <End Role="Profesores" Type="Self.Profesores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="Profesores">
+        <PropertyRef Name="FK_Persona_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario__FK_Pers__2FCF1A8A">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Evento_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioID" />
+      </Principal>
+      <Dependent Role="Evento">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LineaEvento_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="LineaEvento" Type="Self.LineaEvento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioID" />
+      </Principal>
+      <Dependent Role="LineaEvento">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LineaNoticia_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="LineaNoticia" Type="Self.LineaNoticia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioID" />
+      </Principal>
+      <Dependent Role="LineaNoticia">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Noticia_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Noticia" Type="Self.Noticia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioID" />
+      </Principal>
+      <Dependent Role="Noticia">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Seccion_Profesores">
+    <End Role="Profesores" Type="Self.Profesores" Multiplicity="1" />
+    <End Role="Seccion" Type="Self.Seccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesores">
+        <PropertyRef Name="ProfesorID" />
+      </Principal>
+      <Dependent Role="Seccion">
+        <PropertyRef Name="ProfesorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Direccion_TipoDireccion">
+    <End Role="TipoDireccion" Type="Self.TipoDireccion" Multiplicity="1" />
+    <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDireccion">
+        <PropertyRef Name="TipoDireccionID" />
+      </Principal>
+      <Dependent Role="Direccion">
+        <PropertyRef Name="TipoDireccionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Direccion_UbicacionGeografica">
+    <End Role="UbicacionGeografica" Type="Self.UbicacionGeografica" Multiplicity="1" />
+    <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UbicacionGeografica">
+        <PropertyRef Name="UbicacionGeograficaID" />
+      </Principal>
+      <Dependent Role="Direccion">
+        <PropertyRef Name="UbicacionGeograficaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Evento_LineaEvento">
+    <End Role="LineaEvento" Type="Self.LineaEvento" Multiplicity="0..1" />
+    <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LineaEvento">
+        <PropertyRef Name="LineaEventoID" />
+      </Principal>
+      <Dependent Role="Evento">
+        <PropertyRef Name="LineaEventoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Participante_Evento">
+    <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+    <End Role="Participante" Type="Self.Participante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Evento">
+        <PropertyRef Name="EventoID" />
+      </Principal>
+      <Dependent Role="Participante">
+        <PropertyRef Name="EventoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UbicacionGeografica_TipoUbicacionGeografica">
+    <End Role="TipoUbicacionGeografica" Type="Self.TipoUbicacionGeografica" Multiplicity="1" />
+    <End Role="UbicacionGeografica" Type="Self.UbicacionGeografica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUbicacionGeografica">
+        <PropertyRef Name="TipoUbicacionGeograficaID" />
+      </Principal>
+      <Dependent Role="UbicacionGeografica">
+        <PropertyRef Name="TipoUbicacionGeograficaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UbicacionGeografica_UbicacionGeograficaIDPadreID">
+    <End Role="UbicacionGeografica" Type="Self.UbicacionGeografica" Multiplicity="0..1" />
+    <End Role="UbicacionGeografica1" Type="Self.UbicacionGeografica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UbicacionGeografica">
+        <PropertyRef Name="UbicacionGeograficaID" />
+      </Principal>
+      <Dependent Role="UbicacionGeografica1">
+        <PropertyRef Name="UbicacionGeograficaPadreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Noticia_LineaNoticia">
+    <End Role="LineaNoticia" Type="Self.LineaNoticia" Multiplicity="0..1" />
+    <End Role="Noticia" Type="Self.Noticia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LineaNoticia">
+        <PropertyRef Name="LineaNoticiaID" />
+      </Principal>
+      <Dependent Role="Noticia">
+        <PropertyRef Name="LineaNoticiaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PaginaWebEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CategoriaPlatillo" EntityType="Self.CategoriaPlatillo" />
+    <EntitySet Name="Moneda" EntityType="Self.Moneda" />
+    <EntitySet Name="Platillo" EntityType="Self.Platillo" />
+    <EntitySet Name="PlatilloDia" EntityType="Self.PlatilloDia" />
+    <EntitySet Name="Precio" EntityType="Self.Precio" />
+    <EntitySet Name="Reserva" EntityType="Self.Reserva" />
+    <EntitySet Name="TipoCambio" EntityType="Self.TipoCambio" />
+    <EntitySet Name="Genero" EntityType="Self.Genero" />
+    <EntitySet Name="IdentificadorPersona" EntityType="Self.IdentificadorPersona" />
+    <EntitySet Name="MecanismoDeContacto" EntityType="Self.MecanismoDeContacto" />
+    <EntitySet Name="Nacionalidad" EntityType="Self.Nacionalidad" />
+    <EntitySet Name="Persona" EntityType="Self.Persona" />
+    <EntitySet Name="TipoDeTelefono" EntityType="Self.TipoDeTelefono" />
+    <EntitySet Name="TipoIdentificadorPersona" EntityType="Self.TipoIdentificadorPersona" />
+    <EntitySet Name="TipoMecanismoDeContacto" EntityType="Self.TipoMecanismoDeContacto" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Profesores" EntityType="Self.Profesores" />
+    <EntitySet Name="Seccion" EntityType="Self.Seccion" />
+    <EntitySet Name="Direccion" EntityType="Self.Direccion" />
+    <EntitySet Name="Evento" EntityType="Self.Evento" />
+    <EntitySet Name="LineaEvento" EntityType="Self.LineaEvento" />
+    <EntitySet Name="Participante" EntityType="Self.Participante" />
+    <EntitySet Name="TipoDireccion" EntityType="Self.TipoDireccion" />
+    <EntitySet Name="TipoUbicacionGeografica" EntityType="Self.TipoUbicacionGeografica" />
+    <EntitySet Name="UbicacionGeografica" EntityType="Self.UbicacionGeografica" />
+    <EntitySet Name="LineaNoticia" EntityType="Self.LineaNoticia" />
+    <EntitySet Name="Noticia" EntityType="Self.Noticia" />
+    <EntitySet Name="Prioridad" EntityType="Self.Prioridad" />
+    <AssociationSet Name="FK_CategoriaPlatillo_CategoriaPlatilloPadre" Association="Self.FK_CategoriaPlatillo_CategoriaPlatilloPadre">
+      <End Role="CategoriaPlatillo" EntitySet="CategoriaPlatillo" />
+      <End Role="CategoriaPlatillo1" EntitySet="CategoriaPlatillo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platillo_Reserva" Association="Self.FK_Platillo_Reserva">
+      <End Role="Platillo" EntitySet="Platillo" />
+      <End Role="CategoriaPlatillo" EntitySet="CategoriaPlatillo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Precio_Moneda" Association="Self.FK_Precio_Moneda">
+      <End Role="Precio" EntitySet="Precio" />
+      <End Role="Moneda" EntitySet="Moneda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoCambio_MonedaDestinoID" Association="Self.FK_TipoCambio_MonedaDestinoID">
+      <End Role="Moneda" EntitySet="Moneda" />
+      <End Role="TipoCambio" EntitySet="TipoCambio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoCambio_MonedaOrigenID" Association="Self.FK_TipoCambio_MonedaOrigenID">
+      <End Role="Moneda" EntitySet="Moneda" />
+      <End Role="TipoCambio" EntitySet="TipoCambio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platillo_PlatilloDia" Association="Self.FK_Platillo_PlatilloDia">
+      <End Role="Platillo" EntitySet="Platillo" />
+      <End Role="PlatilloDia" EntitySet="PlatilloDia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Precio_Platillo" Association="Self.FK_Precio_Platillo">
+      <End Role="Precio" EntitySet="Precio" />
+      <End Role="Platillo" EntitySet="Platillo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlatilloDia_Reserva" Association="Self.FK_PlatilloDia_Reserva">
+      <End Role="PlatilloDia" EntitySet="PlatilloDia" />
+      <End Role="Reserva" EntitySet="Reserva" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Reserva" Association="Self.FK_Persona_Reserva">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Reserva" EntitySet="Reserva" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Genero" Association="Self.FK_Persona_Genero">
+      <End Role="Genero" EntitySet="Genero" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdentificadorPersona_Persona" Association="Self.FK_IdentificadorPersona_Persona">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="IdentificadorPersona" EntitySet="IdentificadorPersona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdentificadorPersona_TipoIdentificadorPersona" Association="Self.FK_IdentificadorPersona_TipoIdentificadorPersona">
+      <End Role="TipoIdentificadorPersona" EntitySet="TipoIdentificadorPersona" />
+      <End Role="IdentificadorPersona" EntitySet="IdentificadorPersona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_TipoDeTelefono" Association="Self.FK_MecanismoDeContacto_TipoDeTelefono">
+      <End Role="TipoDeTelefono" EntitySet="TipoDeTelefono" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_TipoMecanismoDeContacto" Association="Self.FK_MecanismoDeContacto_TipoMecanismoDeContacto">
+      <End Role="TipoMecanismoDeContacto" EntitySet="TipoMecanismoDeContacto" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Nacionalidad" Association="Self.FK_Persona_Nacionalidad">
+      <End Role="Nacionalidad" EntitySet="Nacionalidad" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Profesore__FK_Pe__640DD89F" Association="Self.FK__Profesore__FK_Pe__640DD89F">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Profesores" EntitySet="Profesores" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuario__FK_Pers__2FCF1A8A" Association="Self.FK__Usuario__FK_Pers__2FCF1A8A">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Evento_Usuario" Association="Self.FK_Evento_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Evento" EntitySet="Evento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LineaEvento_Usuario" Association="Self.FK_LineaEvento_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="LineaEvento" EntitySet="LineaEvento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LineaNoticia_Usuario" Association="Self.FK_LineaNoticia_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="LineaNoticia" EntitySet="LineaNoticia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Noticia_Usuario" Association="Self.FK_Noticia_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Noticia" EntitySet="Noticia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Seccion_Profesores" Association="Self.FK_Seccion_Profesores">
+      <End Role="Profesores" EntitySet="Profesores" />
+      <End Role="Seccion" EntitySet="Seccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Direccion_TipoDireccion" Association="Self.FK_Direccion_TipoDireccion">
+      <End Role="TipoDireccion" EntitySet="TipoDireccion" />
+      <End Role="Direccion" EntitySet="Direccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Direccion_UbicacionGeografica" Association="Self.FK_Direccion_UbicacionGeografica">
+      <End Role="UbicacionGeografica" EntitySet="UbicacionGeografica" />
+      <End Role="Direccion" EntitySet="Direccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Evento_LineaEvento" Association="Self.FK_Evento_LineaEvento">
+      <End Role="LineaEvento" EntitySet="LineaEvento" />
+      <End Role="Evento" EntitySet="Evento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Participante_Evento" Association="Self.FK_Participante_Evento">
+      <End Role="Evento" EntitySet="Evento" />
+      <End Role="Participante" EntitySet="Participante" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UbicacionGeografica_TipoUbicacionGeografica" Association="Self.FK_UbicacionGeografica_TipoUbicacionGeografica">
+      <End Role="TipoUbicacionGeografica" EntitySet="TipoUbicacionGeografica" />
+      <End Role="UbicacionGeografica" EntitySet="UbicacionGeografica" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UbicacionGeografica_UbicacionGeograficaIDPadreID" Association="Self.FK_UbicacionGeografica_UbicacionGeograficaIDPadreID">
+      <End Role="UbicacionGeografica" EntitySet="UbicacionGeografica" />
+      <End Role="UbicacionGeografica1" EntitySet="UbicacionGeografica" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Noticia_LineaNoticia" Association="Self.FK_Noticia_LineaNoticia">
+      <End Role="LineaNoticia" EntitySet="LineaNoticia" />
+      <End Role="Noticia" EntitySet="Noticia" />
+    </AssociationSet>
+    <FunctionImport Name="ActualizarBeca">
+      <Parameter Name="ID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Agregar_Evento">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="Agregar_Modificar_Platillo">
+      <Parameter Name="PlatilloID" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Fotografia" Mode="In" Type="Binary" />
+      <Parameter Name="Habilitado" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Agregar_Noticia">
+      <Parameter Name="Titulo" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+      <Parameter Name="Archivo" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="Agregar_Participantes">
+      <Parameter Name="Rol" Mode="In" Type="String" />
+      <Parameter Name="EventoID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Agregar_Reserva">
+      <Parameter Name="Estado" Mode="In" Type="Boolean" />
+      <Parameter Name="PersonaID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="AgregarPrecio_ModificarPrecio">
+      <Parameter Name="PrecioID" Mode="In" Type="Int32" />
+      <Parameter Name="Valor" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="AgregarProfesor">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+      <Parameter Name="PrimerNombre" Mode="In" Type="String" />
+      <Parameter Name="SegundoNombre" Mode="In" Type="String" />
+      <Parameter Name="PrimerApellido" Mode="In" Type="String" />
+      <Parameter Name="SegundoApellido" Mode="In" Type="String" />
+      <Parameter Name="Contacto" Mode="In" Type="String" />
+      <Parameter Name="NumeroTelefono" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AgregarSeccion">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Profesor" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="BuscarEstudiante" ReturnType="Collection(PaginaWebModel.BuscarEstudiante_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarEvento_ID" ReturnType="Collection(PaginaWebModel.ConsultarEvento_ID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarEvento_PorFecha" ReturnType="Collection(PaginaWebModel.ConsultarEvento_PorFecha_Result)">
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarEvento_PorNombre" ReturnType="Collection(PaginaWebModel.ConsultarEvento_PorNombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarNoticia_ID" ReturnType="Collection(PaginaWebModel.ConsultarNoticia_ID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarNoticia_PorFecha" ReturnType="Collection(PaginaWebModel.ConsultarNoticia_PorFecha_Result)">
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarNoticia_PorTitulo" ReturnType="Collection(PaginaWebModel.ConsultarNoticia_PorTitulo_Result)">
+      <Parameter Name="Titulo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarPlatilloPorNombre" ReturnType="Collection(PaginaWebModel.ConsultarPlatilloPorNombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarPlatoDia" ReturnType="Collection(PaginaWebModel.ConsultarPlatoDia_Result)" />
+    <FunctionImport Name="ConsultarProfesor_ID" ReturnType="Collection(PaginaWebModel.ConsultarProfesor_ID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarProfesor_Nombre" ReturnType="Collection(PaginaWebModel.ConsultarProfesor_Nombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarReservas_PorFecha_Pendientes" ReturnType="Collection(PaginaWebModel.ConsultarReservas_PorFecha_Pendientes_Result)" />
+    <FunctionImport Name="ConsultarReservas_PorNombre" ReturnType="Collection(PaginaWebModel.ConsultarReservas_PorNombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarReservasPorID" ReturnType="Collection(PaginaWebModel.ConsultarReservasPorID_Result)">
+      <Parameter Name="ID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarSeccion_Descripcion" ReturnType="Collection(PaginaWebModel.ConsultarSeccion_Descripcion_Result)">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarSeccion_ID" ReturnType="Collection(PaginaWebModel.ConsultarSeccion_ID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarUsuario" ReturnType="Collection(PaginaWebModel.ConsultarUsuario_Result)">
+      <Parameter Name="Correo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarUsuario_ID" ReturnType="Collection(PaginaWebModel.ConsultarUsuario_ID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Eliminar_Participantes">
+      <Parameter Name="ParticipanteID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarEvento">
+      <Parameter Name="LineaEventoID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarLineaNoticia">
+      <Parameter Name="LineaNoticiaID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarNoticia">
+      <Parameter Name="LineaNoticiaID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarPlatillo">
+      <Parameter Name="PlatilloID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarProfesor">
+      <Parameter Name="ProfesorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarSeccion">
+      <Parameter Name="SeccionID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarUsuario">
+      <Parameter Name="UsuarioID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EntregarPlatillo">
+      <Parameter Name="ID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Ingresar" ReturnType="Collection(PaginaWebModel.Ingresar_Result)">
+      <Parameter Name="Correo" Mode="In" Type="String" />
+      <Parameter Name="Contra" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Insertar_Usuario">
+      <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Contrasena" Mode="In" Type="String" />
+      <Parameter Name="Rol" Mode="In" Type="Byte" />
+      <Parameter Name="Becado" Mode="In" Type="Boolean" />
+      <Parameter Name="Permisos" Mode="In" Type="Boolean" />
+      <Parameter Name="PrimerN" Mode="In" Type="String" />
+      <Parameter Name="PrimerA" Mode="In" Type="String" />
+      <Parameter Name="SegundoN" Mode="In" Type="String" />
+      <Parameter Name="SegundoA" Mode="In" Type="String" />
+      <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+      <Parameter Name="LugarNacimiento" Mode="In" Type="String" />
+      <Parameter Name="GeneroID" Mode="In" Type="Byte" />
+      <Parameter Name="Nacionalidad" Mode="In" Type="Byte" />
+      <Parameter Name="ValorID" Mode="In" Type="String" />
+      <Parameter Name="TipoID" Mode="In" Type="Byte" />
+      <Parameter Name="ValorContacto" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarBecados" ReturnType="Collection(PaginaWebModel.ListarBecados_Result)" />
+    <FunctionImport Name="ListaReserva" ReturnType="Collection(PaginaWebModel.ListaReserva_Result)" />
+    <FunctionImport Name="ListarEstudiantes" ReturnType="Collection(PaginaWebModel.ListarEstudiantes_Result)" />
+    <FunctionImport Name="ListarEstudiantesID" ReturnType="Collection(PaginaWebModel.ListarEstudiantesID_Result)">
+      <Parameter Name="ID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarEstudiantesNombre" ReturnType="Collection(PaginaWebModel.ListarEstudiantesNombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarEventos" ReturnType="Collection(PaginaWebModel.ListarEventos_Result)" />
+    <FunctionImport Name="ListarNoBecados" ReturnType="Collection(PaginaWebModel.ListarNoBecados_Result)" />
+    <FunctionImport Name="ListarNoBecados2" ReturnType="Collection(PaginaWebModel.ListarNoBecados2_Result)" />
+    <FunctionImport Name="ListarNoBecadosID" ReturnType="Collection(PaginaWebModel.ListarNoBecadosID_Result)">
+      <Parameter Name="ID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarNoBecadosNombre" ReturnType="Collection(PaginaWebModel.ListarNoBecadosNombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarNoticias" ReturnType="Collection(PaginaWebModel.ListarNoticias_Result)" />
+    <FunctionImport Name="ListarProfesor_PorNombre" ReturnType="Collection(PaginaWebModel.ListarProfesor_PorNombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarProfesores" ReturnType="Collection(PaginaWebModel.ListarProfesores_Result)" />
+    <FunctionImport Name="ListarSecciones" ReturnType="Collection(PaginaWebModel.ListarSecciones_Result)" />
+    <FunctionImport Name="ListarTodasNoticias" ReturnType="Collection(PaginaWebModel.ListarTodasNoticias_Result)" />
+    <FunctionImport Name="ListarTodosEventos" ReturnType="Collection(PaginaWebModel.ListarTodosEventos_Result)" />
+    <FunctionImport Name="ListarUsuarios" ReturnType="Collection(PaginaWebModel.ListarUsuarios_Result)" />
+    <FunctionImport Name="Modificar_Evento">
+      <Parameter Name="EventoID" Mode="In" Type="Int64" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="Modificar_Noticia">
+      <Parameter Name="NoticiaID" Mode="In" Type="Int64" />
+      <Parameter Name="Titulo" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+      <Parameter Name="Archivo" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="Modificar_Participantes">
+      <Parameter Name="ParticipanteID" Mode="In" Type="Int32" />
+      <Parameter Name="Rol" Mode="In" Type="String" />
+      <Parameter Name="EventoID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ModificarEstadoReserva">
+      <Parameter Name="ReservaID" Mode="In" Type="Int32" />
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="Estado" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="ModificarProfesor">
+      <Parameter Name="ProfesorID" Mode="In" Type="Int32" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+      <Parameter Name="PrimerNombre" Mode="In" Type="String" />
+      <Parameter Name="SegundoNombre" Mode="In" Type="String" />
+      <Parameter Name="PrimerApellido" Mode="In" Type="String" />
+      <Parameter Name="SegundoApellido" Mode="In" Type="String" />
+      <Parameter Name="Contacto" Mode="In" Type="String" />
+      <Parameter Name="NumeroTelefono" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ModificarSeccion">
+      <Parameter Name="SeccionID" Mode="In" Type="Int32" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Profesor" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ModificarUsuario">
+      <Parameter Name="UsuarioID" Mode="In" Type="Int64" />
+      <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
+      <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+      <Parameter Name="Contrasenna" Mode="In" Type="String" />
+      <Parameter Name="Rol" Mode="In" Type="Byte" />
+      <Parameter Name="Becado" Mode="In" Type="Boolean" />
+      <Parameter Name="Permisos" Mode="In" Type="Boolean" />
+      <Parameter Name="PrimerNombre" Mode="In" Type="String" />
+      <Parameter Name="PrimerApellido" Mode="In" Type="String" />
+      <Parameter Name="SegundoApellido" Mode="In" Type="String" />
+      <Parameter Name="SegundoNombre" Mode="In" Type="String" />
+      <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+      <Parameter Name="LugarNacimiento" Mode="In" Type="String" />
+      <Parameter Name="GeneroID" Mode="In" Type="Byte" />
+      <Parameter Name="Nacionalidad" Mode="In" Type="Byte" />
+      <Parameter Name="ValorID" Mode="In" Type="String" />
+      <Parameter Name="TipoID" Mode="In" Type="Byte" />
+      <Parameter Name="ValorContacto" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PermisoReserva" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="SeleccionarPlatillo">
+      <Parameter Name="PlatilloID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(PaginaWebModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(PaginaWebModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="VerificarBecado" ReturnType="Collection(Int32)">
+      <Parameter Name="UsuarioID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="VerificarPlatoDia" ReturnType="Collection(PaginaWebModel.VerificarPlatoDia_Result)" />
+    <FunctionImport Name="VerificarReserva" ReturnType="Collection(PaginaWebModel.VerificarReserva_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int64" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="BuscarEstudiante_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Becado" Nullable="false" />
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ConsultarEvento_ID_Result">
+    <Property Type="Int64" Name="EventoID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConsultarEvento_PorFecha_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConsultarEvento_PorNombre_Result">
+    <Property Type="Int64" Name="EventoID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConsultarNoticia_ID_Result">
+    <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="Binary" Name="Archivo" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConsultarNoticia_PorFecha_Result">
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConsultarNoticia_PorTitulo_Result">
+    <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConsultarPlatilloPorNombre_Result">
+    <Property Type="Guid" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="PlatilloID" Nullable="false" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="1000" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Descripcion1" Nullable="false" MaxLength="1000" />
+    <Property Type="Boolean" Name="Habilitado" Nullable="true" />
+    <Property Type="Binary" Name="Fotografia" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConsultarPlatoDia_Result">
+    <Property Type="Int64" Name="PlatilloDiaID" Nullable="false" />
+    <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="PlatilloID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConsultarProfesor_ID_Result">
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="2000" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contacto" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="NumeroTelefono" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Seccion" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+  </ComplexType>
+  <ComplexType Name="ConsultarProfesor_Nombre_Result">
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="2000" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contacto" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="NumeroTelefono" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Seccion" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+  </ComplexType>
+  <ComplexType Name="ConsultarReservas_PorFecha_Pendientes_Result">
+    <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ConsultarReservas_PorNombre_Result">
+    <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ConsultarReservasPorID_Result">
+    <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ConsultarSeccion_Descripcion_Result">
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="SeccionID" Nullable="false" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+  </ComplexType>
+  <ComplexType Name="ConsultarSeccion_ID_Result">
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="SeccionID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="DecripcionProfesor" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="Contacto" Nullable="true" MaxLength="100" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="NumeroTelefono" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ConsultarUsuario_Result">
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Byte" Name="Rol" Nullable="false" />
+    <Property Type="Boolean" Name="Permisos" Nullable="false" />
+    <Property Type="String" Name="CorreoElectronico" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ConsultarUsuario_ID_Result">
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+    <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CorreoElectronico" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contrasenna" Nullable="false" MaxLength="50" />
+    <Property Type="Byte" Name="Rol" Nullable="false" />
+    <Property Type="Boolean" Name="Becado" Nullable="false" />
+    <Property Type="Boolean" Name="Permisos" Nullable="false" />
+    <Property Type="Byte" Name="GeneroID" Nullable="true" />
+    <Property Type="String" Name="ValorID" Nullable="false" MaxLength="100" />
+    <Property Type="Byte" Name="TipoIdentificadorPersonaID" Nullable="false" />
+    <Property Type="String" Name="ValorContacto" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="Ingresar_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="true" />
+    <Property Type="Byte" Name="Rol" Nullable="false" />
+    <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="Permisos" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListarBecados_Result">
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ListaReserva_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListarEstudiantes_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Becado" Nullable="false" />
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListarEstudiantesID_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Becado" Nullable="false" />
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListarEstudiantesNombre_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Becado" Nullable="false" />
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListarEventos_Result">
+    <Property Type="Int64" Name="EventoID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ListarNoBecados_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ListarNoBecados2_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ListarNoBecadosID_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ListarNoBecadosNombre_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ListarNoticias_Result">
+    <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="Binary" Name="Archivo" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ListarProfesor_PorNombre_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ListarProfesores_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ListarSecciones_Result">
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="SeccionID" Nullable="false" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="Int32" Name="ProfesorID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+  </ComplexType>
+  <ComplexType Name="ListarTodasNoticias_Result">
+    <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ListarTodosEventos_Result">
+    <Property Type="Int64" Name="EventoID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ListarUsuarios_Result">
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Byte" Name="Rol" Nullable="false" />
+    <Property Type="Boolean" Name="Permisos" Nullable="false" />
+    <Property Type="String" Name="CorreoElectronico" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="VerificarPlatoDia_Result">
+    <Property Type="Int64" Name="PlatilloDiaID" Nullable="false" />
+    <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="PlatilloID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="VerificarReserva_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CocinaModelStoreContainer" CdmEntityContainer="CocinaEntities">
+    <EntitySetMapping Name="CategoriaPlatillo">
+      <EntityTypeMapping TypeName="CocinaModel.CategoriaPlatillo">
+        <MappingFragment StoreEntitySet="CategoriaPlatillo">
+          <ScalarProperty Name="CategoriaPlatilloID" ColumnName="CategoriaPlatilloID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="CategoriaPlatilloPadreID" ColumnName="CategoriaPlatilloPadreID" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Moneda">
+      <EntityTypeMapping TypeName="CocinaModel.Moneda">
+        <MappingFragment StoreEntitySet="Moneda">
+          <ScalarProperty Name="MonedaID" ColumnName="MonedaID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ISOALPHA2" ColumnName="ISOALPHA2" />
+          <ScalarProperty Name="ISOALPHA3" ColumnName="ISOALPHA3" />
+          <ScalarProperty Name="PrecioID" ColumnName="PrecioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Platillo">
+      <EntityTypeMapping TypeName="CocinaModel.Platillo">
+        <MappingFragment StoreEntitySet="Platillo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Fotografia" ColumnName="Fotografia" />
+          <ScalarProperty Name="PrecioID" ColumnName="PrecioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlatilloDia">
+      <EntityTypeMapping TypeName="CocinaModel.PlatilloDia">
+        <MappingFragment StoreEntitySet="PlatilloDia">
+          <ScalarProperty Name="PlatilloDiaID" ColumnName="PlatilloDiaID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Precio">
+      <EntityTypeMapping TypeName="CocinaModel.Precio">
+        <MappingFragment StoreEntitySet="Precio">
+          <ScalarProperty Name="PrecioID" ColumnName="PrecioID" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reserva">
+      <EntityTypeMapping TypeName="CocinaModel.Reserva">
+        <MappingFragment StoreEntitySet="Reserva">
+          <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PlatilloDiaID" ColumnName="PlatilloDiaID" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoCambio">
+      <EntityTypeMapping TypeName="CocinaModel.TipoCambio">
+        <MappingFragment StoreEntitySet="TipoCambio">
+          <ScalarProperty Name="TipoCambioID" ColumnName="TipoCambioID" />
+          <ScalarProperty Name="MontoCompra" ColumnName="MontoCompra" />
+          <ScalarProperty Name="MontoVenta" ColumnName="MontoVenta" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="MonedaOrigenID" ColumnName="MonedaOrigenID" />
+          <ScalarProperty Name="MonedaDestinoID" ColumnName="MonedaDestinoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genero">
+      <EntityTypeMapping TypeName="CocinaModel.Genero">
+        <MappingFragment StoreEntitySet="Genero">
+          <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IdentificadorPersona">
+      <EntityTypeMapping TypeName="CocinaModel.IdentificadorPersona">
+        <MappingFragment StoreEntitySet="IdentificadorPersona">
+          <ScalarProperty Name="IdentificadorPersonaID" ColumnName="IdentificadorPersonaID" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="TipoIdentificadorPersonaID" ColumnName="TipoIdentificadorPersonaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MecanismoDeContacto">
+      <EntityTypeMapping TypeName="CocinaModel.MecanismoDeContacto">
+        <MappingFragment StoreEntitySet="MecanismoDeContacto">
+          <ScalarProperty Name="MecanismoDeContactoID" ColumnName="MecanismoDeContactoID" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="TipoMecanismoDeContactoID" ColumnName="TipoMecanismoDeContactoID" />
+          <ScalarProperty Name="TipoDeTelefonoID" ColumnName="TipoDeTelefonoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nacionalidad">
+      <EntityTypeMapping TypeName="CocinaModel.Nacionalidad">
+        <MappingFragment StoreEntitySet="Nacionalidad">
+          <ScalarProperty Name="NacionalidadID" ColumnName="NacionalidadID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persona">
+      <EntityTypeMapping TypeName="CocinaModel.Persona">
+        <MappingFragment StoreEntitySet="Persona">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+          <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+          <ScalarProperty Name="NacionalidadID" ColumnName="NacionalidadID" />
+          <ScalarProperty Name="ParticipanteID" ColumnName="ParticipanteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDeTelefono">
+      <EntityTypeMapping TypeName="CocinaModel.TipoDeTelefono">
+        <MappingFragment StoreEntitySet="TipoDeTelefono">
+          <ScalarProperty Name="TipoDeTelefonoID" ColumnName="TipoDeTelefonoID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoIdentificadorPersona">
+      <EntityTypeMapping TypeName="CocinaModel.TipoIdentificadorPersona">
+        <MappingFragment StoreEntitySet="TipoIdentificadorPersona">
+          <ScalarProperty Name="TipoIdentificadorPersonaID" ColumnName="TipoIdentificadorPersonaID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoMecanismoDeContacto">
+      <EntityTypeMapping TypeName="CocinaModel.TipoMecanismoDeContacto">
+        <MappingFragment StoreEntitySet="TipoMecanismoDeContacto">
+          <ScalarProperty Name="TipoMecanismoDeContactoID" ColumnName="TipoMecanismoDeContactoID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="CocinaModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Agregar_Modificar_Platillo" FunctionName="CocinaModel.Store.Agregar_Modificar_Platillo" />
+    <FunctionImportMapping FunctionImportName="Agregar_Reserva" FunctionName="CocinaModel.Store.Agregar_Reserva" />
+    <FunctionImportMapping FunctionImportName="ConsultarReservas_PorFecha_Pendientes" FunctionName="CocinaModel.Store.ConsultarReservas_PorFecha_Pendientes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.ConsultarReservas_PorFecha_Pendientes_Result">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarReservas_PorNombre" FunctionName="CocinaModel.Store.ConsultarReservas_PorNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.ConsultarReservas_PorNombre_Result">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarReservasPorID" FunctionName="CocinaModel.Store.ConsultarReservasPorID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.ConsultarReservasPorID_Result">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EliminarPlatillo" FunctionName="CocinaModel.Store.EliminarPlatillo" />
+    <FunctionImportMapping FunctionImportName="EntregarPlatillo" FunctionName="CocinaModel.Store.EntregarPlatillo" />
+    <FunctionImportMapping FunctionImportName="ListaReserva" FunctionName="CocinaModel.Store.ListaReserva">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.ListaReserva_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecados" FunctionName="CocinaModel.Store.ListarNoBecados">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.ListarNoBecados_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecados2" FunctionName="CocinaModel.Store.ListarNoBecados2">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.ListarNoBecados2_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecadosID" FunctionName="CocinaModel.Store.ListarNoBecadosID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.ListarNoBecadosID_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecadosNombre" FunctionName="CocinaModel.Store.ListarNoBecadosNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.ListarNoBecadosNombre_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PermisoReserva" FunctionName="CocinaModel.Store.PermisoReserva" />
+    <FunctionImportMapping FunctionImportName="SeleccionarPlatillo" FunctionName="CocinaModel.Store.SeleccionarPlatillo" />
+    <FunctionImportMapping FunctionImportName="VerificarBecado" FunctionName="CocinaModel.Store.VerificarBecado" />
+    <FunctionImportMapping FunctionImportName="VerificarPlatoDia" FunctionName="CocinaModel.Store.VerificarPlatoDia">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.VerificarPlatoDia_Result">
+          <ScalarProperty Name="PlatilloDiaID" ColumnName="PlatilloDiaID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerificarReserva" FunctionName="CocinaModel.Store.VerificarReserva">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.VerificarReserva_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarPlatoDia" FunctionName="CocinaModel.Store.ConsultarPlatoDia">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CocinaModel.ConsultarPlatoDia_Result">
+          <ScalarProperty Name="PlatilloDiaID" ColumnName="PlatilloDiaID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

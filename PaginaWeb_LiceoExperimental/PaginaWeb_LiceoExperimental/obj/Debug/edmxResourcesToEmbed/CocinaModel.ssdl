@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CocinaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CategoriaPlatillo">
+    <Key>
+      <PropertyRef Name="CategoriaPlatilloID" />
+    </Key>
+    <Property Name="CategoriaPlatilloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CategoriaPlatilloPadreID" Type="int" Nullable="false" />
+    <Property Name="PlatilloID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Moneda">
+    <Key>
+      <PropertyRef Name="MonedaID" />
+    </Key>
+    <Property Name="MonedaID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ISOALPHA2" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="ISOALPHA3" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="PrecioID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Platillo">
+    <Key>
+      <PropertyRef Name="PlatilloID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PlatilloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" />
+    <Property Name="Fotografia" Type="varbinary(max)" />
+    <Property Name="PrecioID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlatilloDia">
+    <Key>
+      <PropertyRef Name="PlatilloDiaID" />
+    </Key>
+    <Property Name="PlatilloDiaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="PlatilloID" Type="int" />
+  </EntityType>
+  <EntityType Name="Precio">
+    <Key>
+      <PropertyRef Name="PrecioID" />
+    </Key>
+    <Property Name="PrecioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valor" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reserva">
+    <Key>
+      <PropertyRef Name="ReservaID" />
+    </Key>
+    <Property Name="ReservaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="PersonaID" Type="bigint" Nullable="false" />
+    <Property Name="PlatilloDiaID" Type="bigint" Nullable="false" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoCambio">
+    <Key>
+      <PropertyRef Name="TipoCambioID" />
+    </Key>
+    <Property Name="TipoCambioID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MontoCompra" Type="money" Nullable="false" />
+    <Property Name="MontoVenta" Type="money" Nullable="false" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+    <Property Name="MonedaOrigenID" Type="tinyint" Nullable="false" />
+    <Property Name="MonedaDestinoID" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Genero">
+    <Key>
+      <PropertyRef Name="GeneroID" />
+    </Key>
+    <Property Name="GeneroID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IdentificadorPersona">
+    <Key>
+      <PropertyRef Name="IdentificadorPersonaID" />
+    </Key>
+    <Property Name="IdentificadorPersonaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valor" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FechaVencimiento" Type="date" />
+    <Property Name="PersonaID" Type="bigint" Nullable="false" />
+    <Property Name="TipoIdentificadorPersonaID" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MecanismoDeContacto">
+    <Key>
+      <PropertyRef Name="MecanismoDeContactoID" />
+    </Key>
+    <Property Name="MecanismoDeContactoID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valor" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Prioridad" Type="tinyint" Nullable="false" />
+    <Property Name="PersonaID" Type="bigint" Nullable="false" />
+    <Property Name="TipoMecanismoDeContactoID" Type="tinyint" Nullable="false" />
+    <Property Name="TipoDeTelefonoID" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Nacionalidad">
+    <Key>
+      <PropertyRef Name="NacionalidadID" />
+    </Key>
+    <Property Name="NacionalidadID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="PersonaID" />
+    </Key>
+    <Property Name="PersonaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PrimerNombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PrimerApellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="SegundoApellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="SegundoNombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="FechaNacimiento" Type="date" />
+    <Property Name="LugarNacimiento" Type="nvarchar" MaxLength="100" />
+    <Property Name="GeneroID" Type="tinyint" />
+    <Property Name="NacionalidadID" Type="tinyint" />
+    <Property Name="ParticipanteID" Type="int" />
+  </EntityType>
+  <EntityType Name="TipoDeTelefono">
+    <Key>
+      <PropertyRef Name="TipoDeTelefonoID" />
+    </Key>
+    <Property Name="TipoDeTelefonoID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoIdentificadorPersona">
+    <Key>
+      <PropertyRef Name="TipoIdentificadorPersonaID" />
+    </Key>
+    <Property Name="TipoIdentificadorPersonaID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoMecanismoDeContacto">
+    <Key>
+      <PropertyRef Name="TipoMecanismoDeContactoID" />
+    </Key>
+    <Property Name="TipoMecanismoDeContactoID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioID" />
+    </Key>
+    <Property Name="UsuarioID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CorreoElectronico" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contrasenna" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Rol" Type="tinyint" Nullable="false" />
+    <Property Name="Becado" Type="bit" Nullable="false" />
+    <Property Name="Permisos" Type="bit" Nullable="false" />
+    <Property Name="PersonaID" Type="bigint" />
+  </EntityType>
+  <Association Name="FK__Usuario__FK_Pers__2FCF1A8A">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoriaPlatillo_CategoriaPlatilloPadre">
+    <End Role="CategoriaPlatillo" Type="Self.CategoriaPlatillo" Multiplicity="1" />
+    <End Role="CategoriaPlatillo1" Type="Self.CategoriaPlatillo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoriaPlatillo">
+        <PropertyRef Name="CategoriaPlatilloID" />
+      </Principal>
+      <Dependent Role="CategoriaPlatillo1">
+        <PropertyRef Name="CategoriaPlatilloPadreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdentificadorPersona_Persona">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="IdentificadorPersona" Type="Self.IdentificadorPersona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="IdentificadorPersona">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdentificadorPersona_TipoIdentificadorPersona">
+    <End Role="TipoIdentificadorPersona" Type="Self.TipoIdentificadorPersona" Multiplicity="1" />
+    <End Role="IdentificadorPersona" Type="Self.IdentificadorPersona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoIdentificadorPersona">
+        <PropertyRef Name="TipoIdentificadorPersonaID" />
+      </Principal>
+      <Dependent Role="IdentificadorPersona">
+        <PropertyRef Name="TipoIdentificadorPersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_Persons">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_TipoDeTelefono">
+    <End Role="TipoDeTelefono" Type="Self.TipoDeTelefono" Multiplicity="0..1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDeTelefono">
+        <PropertyRef Name="TipoDeTelefonoID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="TipoDeTelefonoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_TipoMecanismoDeContacto">
+    <End Role="TipoMecanismoDeContacto" Type="Self.TipoMecanismoDeContacto" Multiplicity="1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMecanismoDeContacto">
+        <PropertyRef Name="TipoMecanismoDeContactoID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="TipoMecanismoDeContactoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Genero">
+    <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genero">
+        <PropertyRef Name="GeneroID" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="GeneroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Nacionalidad">
+    <End Role="Nacionalidad" Type="Self.Nacionalidad" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nacionalidad">
+        <PropertyRef Name="NacionalidadID" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="NacionalidadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Reserva">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platillo_PlatilloDia">
+    <End Role="Platillo" Type="Self.Platillo" Multiplicity="0..1" />
+    <End Role="PlatilloDia" Type="Self.PlatilloDia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Platillo">
+        <PropertyRef Name="PlatilloID" />
+      </Principal>
+      <Dependent Role="PlatilloDia">
+        <PropertyRef Name="PlatilloID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platillo_Reserva">
+    <End Role="Platillo" Type="Self.Platillo" Multiplicity="1" />
+    <End Role="CategoriaPlatillo" Type="Self.CategoriaPlatillo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Platillo">
+        <PropertyRef Name="PlatilloID" />
+      </Principal>
+      <Dependent Role="CategoriaPlatillo">
+        <PropertyRef Name="PlatilloID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlatilloDia_Reserva">
+    <End Role="PlatilloDia" Type="Self.PlatilloDia" Multiplicity="1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlatilloDia">
+        <PropertyRef Name="PlatilloDiaID" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="PlatilloDiaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Precio_Moneda">
+    <End Role="Precio" Type="Self.Precio" Multiplicity="1" />
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Precio">
+        <PropertyRef Name="PrecioID" />
+      </Principal>
+      <Dependent Role="Moneda">
+        <PropertyRef Name="PrecioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Precio_Platillo">
+    <End Role="Precio" Type="Self.Precio" Multiplicity="1" />
+    <End Role="Platillo" Type="Self.Platillo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Precio">
+        <PropertyRef Name="PrecioID" />
+      </Principal>
+      <Dependent Role="Platillo">
+        <PropertyRef Name="PrecioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TipoCambio_MonedaDestinoID">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
+    <End Role="TipoCambio" Type="Self.TipoCambio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="MonedaID" />
+      </Principal>
+      <Dependent Role="TipoCambio">
+        <PropertyRef Name="MonedaDestinoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TipoCambio_MonedaOrigenID">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
+    <End Role="TipoCambio" Type="Self.TipoCambio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="MonedaID" />
+      </Principal>
+      <Dependent Role="TipoCambio">
+        <PropertyRef Name="MonedaOrigenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Agregar_Modificar_Platillo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlatilloID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+    <Parameter Name="Fotografia" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="Habilitado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Agregar_Reserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="PersonaID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ConsultarPlatoDia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ConsultarReservas_PorFecha_Pendientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Plato" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ConsultarReservas_PorNombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Plato" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ConsultarReservasPorID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Plato" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EliminarPlatillo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlatilloID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EntregarPlatillo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ListaReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Plato" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ListarNoBecados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarNoBecados2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarNoBecadosID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ListarNoBecadosNombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="PermisoReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SeleccionarPlatillo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlatilloID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="VerificarBecado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UsuarioID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="VerificarPlatoDia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="VerificarReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="bigint" Mode="In" />
+  </Function>
+  <EntityContainer Name="CocinaModelStoreContainer">
+    <EntitySet Name="CategoriaPlatillo" EntityType="Self.CategoriaPlatillo" Schema="Cocina" store:Type="Tables" />
+    <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="Cocina" store:Type="Tables" />
+    <EntitySet Name="Platillo" EntityType="Self.Platillo" Schema="Cocina" store:Type="Tables" />
+    <EntitySet Name="PlatilloDia" EntityType="Self.PlatilloDia" Schema="Cocina" store:Type="Tables" />
+    <EntitySet Name="Precio" EntityType="Self.Precio" Schema="Cocina" store:Type="Tables" />
+    <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="Cocina" store:Type="Tables" />
+    <EntitySet Name="TipoCambio" EntityType="Self.TipoCambio" Schema="Cocina" store:Type="Tables" />
+    <EntitySet Name="Genero" EntityType="Self.Genero" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="IdentificadorPersona" EntityType="Self.IdentificadorPersona" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="MecanismoDeContacto" EntityType="Self.MecanismoDeContacto" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="Nacionalidad" EntityType="Self.Nacionalidad" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="Persona" EntityType="Self.Persona" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="TipoDeTelefono" EntityType="Self.TipoDeTelefono" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="TipoIdentificadorPersona" EntityType="Self.TipoIdentificadorPersona" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="TipoMecanismoDeContacto" EntityType="Self.TipoMecanismoDeContacto" Schema="DatosPersona" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="DatosUsuario" store:Type="Tables" />
+    <AssociationSet Name="FK__Usuario__FK_Pers__2FCF1A8A" Association="Self.FK__Usuario__FK_Pers__2FCF1A8A">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoriaPlatillo_CategoriaPlatilloPadre" Association="Self.FK_CategoriaPlatillo_CategoriaPlatilloPadre">
+      <End Role="CategoriaPlatillo" EntitySet="CategoriaPlatillo" />
+      <End Role="CategoriaPlatillo1" EntitySet="CategoriaPlatillo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdentificadorPersona_Persona" Association="Self.FK_IdentificadorPersona_Persona">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="IdentificadorPersona" EntitySet="IdentificadorPersona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdentificadorPersona_TipoIdentificadorPersona" Association="Self.FK_IdentificadorPersona_TipoIdentificadorPersona">
+      <End Role="TipoIdentificadorPersona" EntitySet="TipoIdentificadorPersona" />
+      <End Role="IdentificadorPersona" EntitySet="IdentificadorPersona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_Persons" Association="Self.FK_MecanismoDeContacto_Persons">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_TipoDeTelefono" Association="Self.FK_MecanismoDeContacto_TipoDeTelefono">
+      <End Role="TipoDeTelefono" EntitySet="TipoDeTelefono" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_TipoMecanismoDeContacto" Association="Self.FK_MecanismoDeContacto_TipoMecanismoDeContacto">
+      <End Role="TipoMecanismoDeContacto" EntitySet="TipoMecanismoDeContacto" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Genero" Association="Self.FK_Persona_Genero">
+      <End Role="Genero" EntitySet="Genero" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Nacionalidad" Association="Self.FK_Persona_Nacionalidad">
+      <End Role="Nacionalidad" EntitySet="Nacionalidad" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Reserva" Association="Self.FK_Persona_Reserva">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Reserva" EntitySet="Reserva" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platillo_PlatilloDia" Association="Self.FK_Platillo_PlatilloDia">
+      <End Role="Platillo" EntitySet="Platillo" />
+      <End Role="PlatilloDia" EntitySet="PlatilloDia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platillo_Reserva" Association="Self.FK_Platillo_Reserva">
+      <End Role="Platillo" EntitySet="Platillo" />
+      <End Role="CategoriaPlatillo" EntitySet="CategoriaPlatillo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlatilloDia_Reserva" Association="Self.FK_PlatilloDia_Reserva">
+      <End Role="PlatilloDia" EntitySet="PlatilloDia" />
+      <End Role="Reserva" EntitySet="Reserva" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Precio_Moneda" Association="Self.FK_Precio_Moneda">
+      <End Role="Precio" EntitySet="Precio" />
+      <End Role="Moneda" EntitySet="Moneda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Precio_Platillo" Association="Self.FK_Precio_Platillo">
+      <End Role="Precio" EntitySet="Precio" />
+      <End Role="Platillo" EntitySet="Platillo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoCambio_MonedaDestinoID" Association="Self.FK_TipoCambio_MonedaDestinoID">
+      <End Role="Moneda" EntitySet="Moneda" />
+      <End Role="TipoCambio" EntitySet="TipoCambio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoCambio_MonedaOrigenID" Association="Self.FK_TipoCambio_MonedaOrigenID">
+      <End Role="Moneda" EntitySet="Moneda" />
+      <End Role="TipoCambio" EntitySet="TipoCambio" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

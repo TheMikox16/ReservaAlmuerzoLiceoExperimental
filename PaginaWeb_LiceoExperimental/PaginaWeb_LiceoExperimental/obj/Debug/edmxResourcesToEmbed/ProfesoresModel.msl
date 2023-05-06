@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProfesoresModelStoreContainer" CdmEntityContainer="ProfesoresEntities">
+    <EntitySetMapping Name="Profesores">
+      <EntityTypeMapping TypeName="ProfesoresModel.Profesores">
+        <MappingFragment StoreEntitySet="Profesores">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="FK_Persona_ID" ColumnName="FK_Persona_ID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="NumeroTelefono" ColumnName="NumeroTelefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seccion">
+      <EntityTypeMapping TypeName="ProfesoresModel.Seccion">
+        <MappingFragment StoreEntitySet="Seccion">
+          <ScalarProperty Name="SeccionID" ColumnName="SeccionID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AgregarProfesor" FunctionName="ProfesoresModel.Store.AgregarProfesor" />
+    <FunctionImportMapping FunctionImportName="AgregarSeccion" FunctionName="ProfesoresModel.Store.AgregarSeccion" />
+    <FunctionImportMapping FunctionImportName="ConsultarProfesor_ID" FunctionName="ProfesoresModel.Store.ConsultarProfesor_ID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProfesoresModel.ConsultarProfesor_ID_Result">
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="NumeroTelefono" ColumnName="NumeroTelefono" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarProfesor_Nombre" FunctionName="ProfesoresModel.Store.ConsultarProfesor_Nombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProfesoresModel.ConsultarProfesor_Nombre_Result">
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="NumeroTelefono" ColumnName="NumeroTelefono" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarSeccion_Descripcion" FunctionName="ProfesoresModel.Store.ConsultarSeccion_Descripcion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProfesoresModel.ConsultarSeccion_Descripcion_Result">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="SeccionID" ColumnName="SeccionID" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EliminarProfesor" FunctionName="ProfesoresModel.Store.EliminarProfesor" />
+    <FunctionImportMapping FunctionImportName="ListarProfesor_PorNombre" FunctionName="ProfesoresModel.Store.ListarProfesor_PorNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProfesoresModel.ListarProfesor_PorNombre_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarProfesores" FunctionName="ProfesoresModel.Store.ListarProfesores">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProfesoresModel.ListarProfesores_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarSecciones" FunctionName="ProfesoresModel.Store.ListarSecciones">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProfesoresModel.ListarSecciones_Result">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="SeccionID" ColumnName="SeccionID" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarSeccion_ID" FunctionName="ProfesoresModel.Store.ConsultarSeccion_ID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProfesoresModel.ConsultarSeccion_ID_Result">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="SeccionID" ColumnName="SeccionID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="DecripcionProfesor" ColumnName="DecripcionProfesor" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="NumeroTelefono" ColumnName="NumeroTelefono" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EliminarSeccion" FunctionName="ProfesoresModel.Store.EliminarSeccion" />
+    <FunctionImportMapping FunctionImportName="ModificarProfesor" FunctionName="ProfesoresModel.Store.ModificarProfesor" />
+    <FunctionImportMapping FunctionImportName="ModificarSeccion" FunctionName="ProfesoresModel.Store.ModificarSeccion" />
+  </EntityContainerMapping>
+</Mapping>

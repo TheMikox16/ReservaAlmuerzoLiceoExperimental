@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NoticiasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="LineaNoticia">
+    <Key>
+      <PropertyRef Name="LineaNoticiaID" />
+    </Key>
+    <Property Name="LineaNoticiaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UsuarioID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Noticia" Relationship="Self.FK_Noticia_LineaNoticia" FromRole="LineaNoticia" ToRole="Noticia" />
+  </EntityType>
+  <EntityType Name="Noticia">
+    <Key>
+      <PropertyRef Name="NoticiaID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="NoticiaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Titulo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="LineaNoticiaID" Type="Int64" />
+    <Property Name="UsuarioID" Type="Int64" />
+    <Property Name="Archivo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="LineaNoticia" Relationship="Self.FK_Noticia_LineaNoticia" FromRole="Noticia" ToRole="LineaNoticia" />
+  </EntityType>
+  <EntityType Name="Prioridad">
+    <Key>
+      <PropertyRef Name="PrioridadID" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="PrioridadID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Noticia_LineaNoticia">
+    <End Role="LineaNoticia" Type="Self.LineaNoticia" Multiplicity="0..1" />
+    <End Role="Noticia" Type="Self.Noticia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LineaNoticia">
+        <PropertyRef Name="LineaNoticiaID" />
+      </Principal>
+      <Dependent Role="Noticia">
+        <PropertyRef Name="LineaNoticiaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NoticiasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LineaNoticia" EntityType="Self.LineaNoticia" />
+    <EntitySet Name="Noticia" EntityType="Self.Noticia" />
+    <EntitySet Name="Prioridad" EntityType="Self.Prioridad" />
+    <AssociationSet Name="FK_Noticia_LineaNoticia" Association="Self.FK_Noticia_LineaNoticia">
+      <End Role="LineaNoticia" EntitySet="LineaNoticia" />
+      <End Role="Noticia" EntitySet="Noticia" />
+    </AssociationSet>
+    <FunctionImport Name="Agregar_Noticia">
+      <Parameter Name="Titulo" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+      <Parameter Name="Archivo" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarNoticia_ID" ReturnType="Collection(NoticiasModel.ConsultarNoticia_ID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarNoticia_PorFecha" ReturnType="Collection(NoticiasModel.ConsultarNoticia_PorFecha_Result)">
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarNoticia_PorTitulo" ReturnType="Collection(NoticiasModel.ConsultarNoticia_PorTitulo_Result)">
+      <Parameter Name="Titulo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarLineaNoticia">
+      <Parameter Name="LineaNoticiaID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarNoticia">
+      <Parameter Name="LineaNoticiaID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ListarNoticias" ReturnType="Collection(NoticiasModel.ListarNoticias_Result)" />
+    <FunctionImport Name="ListarTodasNoticias" ReturnType="Collection(NoticiasModel.ListarTodasNoticias_Result)" />
+    <FunctionImport Name="Modificar_Noticia">
+      <Parameter Name="NoticiaID" Mode="In" Type="Int64" />
+      <Parameter Name="Titulo" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+      <Parameter Name="Archivo" Mode="In" Type="Binary" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ConsultarNoticia_ID_Result">
+    <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="Binary" Name="Archivo" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConsultarNoticia_PorFecha_Result">
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConsultarNoticia_PorTitulo_Result">
+    <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ListarNoticias_Result">
+    <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="Binary" Name="Archivo" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ListarTodasNoticias_Result">
+    <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+    <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+</Schema>

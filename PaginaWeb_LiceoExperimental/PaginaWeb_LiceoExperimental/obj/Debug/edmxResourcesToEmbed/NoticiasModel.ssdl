@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NoticiasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="LineaNoticia">
+    <Key>
+      <PropertyRef Name="LineaNoticiaID" />
+    </Key>
+    <Property Name="LineaNoticiaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+    <Property Name="UsuarioID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Noticia">
+    <Key>
+      <PropertyRef Name="NoticiaID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NoticiaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titulo" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="3000" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Imagen" Type="varbinary(max)" />
+    <Property Name="LineaNoticiaID" Type="bigint" />
+    <Property Name="UsuarioID" Type="bigint" />
+    <Property Name="Archivo" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'db_a8ac14_experimentalweb.Noticia.Prioridad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Prioridad">
+    <Key>
+      <PropertyRef Name="PrioridadID" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="PrioridadID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Noticia_LineaNoticia">
+    <End Role="LineaNoticia" Type="Self.LineaNoticia" Multiplicity="0..1" />
+    <End Role="Noticia" Type="Self.Noticia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LineaNoticia">
+        <PropertyRef Name="LineaNoticiaID" />
+      </Principal>
+      <Dependent Role="Noticia">
+        <PropertyRef Name="LineaNoticiaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Agregar_Noticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Titulo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+    <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="Archivo" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="ConsultarNoticia_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ConsultarNoticia_PorFecha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Fecha" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="ConsultarNoticia_PorTitulo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Titulo" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EliminarLineaNoticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LineaNoticiaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EliminarNoticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LineaNoticiaID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ListarNoticias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarTodasNoticias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Modificar_Noticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NoticiaID" Type="bigint" Mode="In" />
+    <Parameter Name="Titulo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+    <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="Archivo" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <EntityContainer Name="NoticiasModelStoreContainer">
+    <EntitySet Name="LineaNoticia" EntityType="Self.LineaNoticia" Schema="Noticia" store:Type="Tables" />
+    <EntitySet Name="Noticia" EntityType="Self.Noticia" Schema="Noticia" store:Type="Tables" />
+    <EntitySet Name="Prioridad" EntityType="Self.Prioridad" store:Type="Tables" store:Schema="Noticia">
+      <DefiningQuery>SELECT 
+    [Prioridad].[PrioridadID] AS [PrioridadID], 
+    [Prioridad].[Descripcion] AS [Descripcion]
+    FROM [Noticia].[Prioridad] AS [Prioridad]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Noticia_LineaNoticia" Association="Self.FK_Noticia_LineaNoticia">
+      <End Role="LineaNoticia" EntitySet="LineaNoticia" />
+      <End Role="Noticia" EntitySet="Noticia" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

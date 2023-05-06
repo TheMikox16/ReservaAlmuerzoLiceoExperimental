@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UsuariosModelStoreContainer" CdmEntityContainer="UsuariosEntities">
+    <EntitySetMapping Name="Genero">
+      <EntityTypeMapping TypeName="UsuariosModel.Genero">
+        <MappingFragment StoreEntitySet="Genero">
+          <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IdentificadorPersona">
+      <EntityTypeMapping TypeName="UsuariosModel.IdentificadorPersona">
+        <MappingFragment StoreEntitySet="IdentificadorPersona">
+          <ScalarProperty Name="IdentificadorPersonaID" ColumnName="IdentificadorPersonaID" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="TipoIdentificadorPersonaID" ColumnName="TipoIdentificadorPersonaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MecanismoDeContacto">
+      <EntityTypeMapping TypeName="UsuariosModel.MecanismoDeContacto">
+        <MappingFragment StoreEntitySet="MecanismoDeContacto">
+          <ScalarProperty Name="MecanismoDeContactoID" ColumnName="MecanismoDeContactoID" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="TipoMecanismoDeContactoID" ColumnName="TipoMecanismoDeContactoID" />
+          <ScalarProperty Name="TipoDeTelefonoID" ColumnName="TipoDeTelefonoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nacionalidad">
+      <EntityTypeMapping TypeName="UsuariosModel.Nacionalidad">
+        <MappingFragment StoreEntitySet="Nacionalidad">
+          <ScalarProperty Name="NacionalidadID" ColumnName="NacionalidadID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persona">
+      <EntityTypeMapping TypeName="UsuariosModel.Persona">
+        <MappingFragment StoreEntitySet="Persona">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+          <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+          <ScalarProperty Name="NacionalidadID" ColumnName="NacionalidadID" />
+          <ScalarProperty Name="ParticipanteID" ColumnName="ParticipanteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDeTelefono">
+      <EntityTypeMapping TypeName="UsuariosModel.TipoDeTelefono">
+        <MappingFragment StoreEntitySet="TipoDeTelefono">
+          <ScalarProperty Name="TipoDeTelefonoID" ColumnName="TipoDeTelefonoID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoIdentificadorPersona">
+      <EntityTypeMapping TypeName="UsuariosModel.TipoIdentificadorPersona">
+        <MappingFragment StoreEntitySet="TipoIdentificadorPersona">
+          <ScalarProperty Name="TipoIdentificadorPersonaID" ColumnName="TipoIdentificadorPersonaID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoMecanismoDeContacto">
+      <EntityTypeMapping TypeName="UsuariosModel.TipoMecanismoDeContacto">
+        <MappingFragment StoreEntitySet="TipoMecanismoDeContacto">
+          <ScalarProperty Name="TipoMecanismoDeContactoID" ColumnName="TipoMecanismoDeContactoID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="UsuariosModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ActualizarBeca" FunctionName="UsuariosModel.Store.ActualizarBeca" />
+    <FunctionImportMapping FunctionImportName="ConsultarUsuario" FunctionName="UsuariosModel.Store.ConsultarUsuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.ConsultarUsuario_Result">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarUsuario_ID" FunctionName="UsuariosModel.Store.ConsultarUsuario_ID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.ConsultarUsuario_ID_Result">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+          <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+          <ScalarProperty Name="ValorID" ColumnName="ValorID" />
+          <ScalarProperty Name="TipoIdentificadorPersonaID" ColumnName="TipoIdentificadorPersonaID" />
+          <ScalarProperty Name="ValorContacto" ColumnName="ValorContacto" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EliminarUsuario" FunctionName="UsuariosModel.Store.EliminarUsuario" />
+    <FunctionImportMapping FunctionImportName="Insertar_Usuario" FunctionName="UsuariosModel.Store.Insertar_Usuario" />
+    <FunctionImportMapping FunctionImportName="ListarBecados" FunctionName="UsuariosModel.Store.ListarBecados">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.ListarBecados_Result">
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecados" FunctionName="UsuariosModel.Store.ListarNoBecados">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.ListarNoBecados_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecadosID" FunctionName="UsuariosModel.Store.ListarNoBecadosID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.ListarNoBecadosID_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecadosNombre" FunctionName="UsuariosModel.Store.ListarNoBecadosNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.ListarNoBecadosNombre_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarUsuarios" FunctionName="UsuariosModel.Store.ListarUsuarios">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.ListarUsuarios_Result">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ModificarUsuario" FunctionName="UsuariosModel.Store.ModificarUsuario" />
+    <FunctionImportMapping FunctionImportName="ListarEstudiantes" FunctionName="UsuariosModel.Store.ListarEstudiantes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.ListarEstudiantes_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarEstudiantesID" FunctionName="UsuariosModel.Store.ListarEstudiantesID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.ListarEstudiantesID_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarEstudiantesNombre" FunctionName="UsuariosModel.Store.ListarEstudiantesNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.ListarEstudiantesNombre_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarEstudiante" FunctionName="UsuariosModel.Store.BuscarEstudiante">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.BuscarEstudiante_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Ingresar" FunctionName="UsuariosModel.Store.Ingresar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UsuariosModel.Ingresar_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

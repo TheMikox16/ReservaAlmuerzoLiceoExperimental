@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EventosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="DireccionID" />
+          </Key>
+          <Property Name="DireccionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Linea1" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Linea2" Type="nvarchar" MaxLength="100" />
+          <Property Name="Prioridad" Type="tinyint" Nullable="false" />
+          <Property Name="TipoDireccionID" Type="tinyint" Nullable="false" />
+          <Property Name="UbicacionGeograficaID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="EventoID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EventoID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="LineaEventoID" Type="int" />
+          <Property Name="UsuarioID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="LineaEvento">
+          <Key>
+            <PropertyRef Name="LineaEventoID" />
+          </Key>
+          <Property Name="LineaEventoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="ParticipanteID" />
+          </Key>
+          <Property Name="ParticipanteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EventoID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDireccion">
+          <Key>
+            <PropertyRef Name="TipoDireccionID" />
+          </Key>
+          <Property Name="TipoDireccionID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoUbicacionGeografica">
+          <Key>
+            <PropertyRef Name="TipoUbicacionGeograficaID" />
+          </Key>
+          <Property Name="TipoUbicacionGeograficaID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UbicacionGeografica">
+          <Key>
+            <PropertyRef Name="UbicacionGeograficaID" />
+          </Key>
+          <Property Name="UbicacionGeograficaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoUbicacionGeograficaID" Type="tinyint" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UbicacionGeograficaPadreID" Type="smallint" />
+        </EntityType>
+        <Association Name="FK_Direccion_TipoDireccion">
+          <End Role="TipoDireccion" Type="Self.TipoDireccion" Multiplicity="1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDireccion">
+              <PropertyRef Name="TipoDireccionID" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="TipoDireccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Direccion_UbicacionGeografica">
+          <End Role="UbicacionGeografica" Type="Self.UbicacionGeografica" Multiplicity="1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UbicacionGeografica">
+              <PropertyRef Name="UbicacionGeograficaID" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="UbicacionGeograficaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evento_LineaEvento">
+          <End Role="LineaEvento" Type="Self.LineaEvento" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineaEvento">
+              <PropertyRef Name="LineaEventoID" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="LineaEventoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_Evento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="Participante" Type="Self.Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="EventoID" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="EventoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UbicacionGeografica_TipoUbicacionGeografica">
+          <End Role="TipoUbicacionGeografica" Type="Self.TipoUbicacionGeografica" Multiplicity="1" />
+          <End Role="UbicacionGeografica" Type="Self.UbicacionGeografica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUbicacionGeografica">
+              <PropertyRef Name="TipoUbicacionGeograficaID" />
+            </Principal>
+            <Dependent Role="UbicacionGeografica">
+              <PropertyRef Name="TipoUbicacionGeograficaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UbicacionGeografica_UbicacionGeograficaIDPadreID">
+          <End Role="UbicacionGeografica" Type="Self.UbicacionGeografica" Multiplicity="0..1" />
+          <End Role="UbicacionGeografica1" Type="Self.UbicacionGeografica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UbicacionGeografica">
+              <PropertyRef Name="UbicacionGeograficaID" />
+            </Principal>
+            <Dependent Role="UbicacionGeografica1">
+              <PropertyRef Name="UbicacionGeograficaPadreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Agregar_Evento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="Agregar_Participantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Rol" Type="nvarchar" Mode="In" />
+          <Parameter Name="EventoID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarEvento_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarEvento_PorFecha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ConsultarEvento_PorNombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Eliminar_Participantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ParticipanteID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LineaEventoID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ListarEventos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListarTodosEventos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Modificar_Evento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoID" Type="bigint" Mode="In" />
+          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="Modificar_Participantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ParticipanteID" Type="int" Mode="In" />
+          <Parameter Name="Rol" Type="nvarchar" Mode="In" />
+          <Parameter Name="EventoID" Type="bigint" Mode="In" />
+        </Function>
+        <EntityContainer Name="EventosModelStoreContainer">
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="Evento" store:Type="Tables" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" Schema="Evento" store:Type="Tables" />
+          <EntitySet Name="LineaEvento" EntityType="Self.LineaEvento" Schema="Evento" store:Type="Tables" />
+          <EntitySet Name="Participante" EntityType="Self.Participante" Schema="Evento" store:Type="Tables" />
+          <EntitySet Name="TipoDireccion" EntityType="Self.TipoDireccion" Schema="Evento" store:Type="Tables" />
+          <EntitySet Name="TipoUbicacionGeografica" EntityType="Self.TipoUbicacionGeografica" Schema="Evento" store:Type="Tables" />
+          <EntitySet Name="UbicacionGeografica" EntityType="Self.UbicacionGeografica" Schema="Evento" store:Type="Tables" />
+          <AssociationSet Name="FK_Direccion_TipoDireccion" Association="Self.FK_Direccion_TipoDireccion">
+            <End Role="TipoDireccion" EntitySet="TipoDireccion" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Direccion_UbicacionGeografica" Association="Self.FK_Direccion_UbicacionGeografica">
+            <End Role="UbicacionGeografica" EntitySet="UbicacionGeografica" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evento_LineaEvento" Association="Self.FK_Evento_LineaEvento">
+            <End Role="LineaEvento" EntitySet="LineaEvento" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_Evento" Association="Self.FK_Participante_Evento">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Participante" EntitySet="Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UbicacionGeografica_TipoUbicacionGeografica" Association="Self.FK_UbicacionGeografica_TipoUbicacionGeografica">
+            <End Role="TipoUbicacionGeografica" EntitySet="TipoUbicacionGeografica" />
+            <End Role="UbicacionGeografica" EntitySet="UbicacionGeografica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UbicacionGeografica_UbicacionGeograficaIDPadreID" Association="Self.FK_UbicacionGeografica_UbicacionGeograficaIDPadreID">
+            <End Role="UbicacionGeografica" EntitySet="UbicacionGeografica" />
+            <End Role="UbicacionGeografica1" EntitySet="UbicacionGeografica" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EventosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="DireccionID" />
+          </Key>
+          <Property Name="DireccionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Linea1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Linea2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Prioridad" Type="Byte" Nullable="false" />
+          <Property Name="TipoDireccionID" Type="Byte" Nullable="false" />
+          <Property Name="UbicacionGeograficaID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="TipoDireccion" Relationship="Self.FK_Direccion_TipoDireccion" FromRole="Direccion" ToRole="TipoDireccion" />
+          <NavigationProperty Name="UbicacionGeografica" Relationship="Self.FK_Direccion_UbicacionGeografica" FromRole="Direccion" ToRole="UbicacionGeografica" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="EventoID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="EventoID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LineaEventoID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Int64" />
+          <NavigationProperty Name="LineaEvento" Relationship="Self.FK_Evento_LineaEvento" FromRole="Evento" ToRole="LineaEvento" />
+          <NavigationProperty Name="Participante" Relationship="Self.FK_Participante_Evento" FromRole="Evento" ToRole="Participante" />
+        </EntityType>
+        <EntityType Name="LineaEvento">
+          <Key>
+            <PropertyRef Name="LineaEventoID" />
+          </Key>
+          <Property Name="LineaEventoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK_Evento_LineaEvento" FromRole="LineaEvento" ToRole="Evento" />
+        </EntityType>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="ParticipanteID" />
+          </Key>
+          <Property Name="ParticipanteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EventoID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK_Participante_Evento" FromRole="Participante" ToRole="Evento" />
+        </EntityType>
+        <EntityType Name="TipoDireccion">
+          <Key>
+            <PropertyRef Name="TipoDireccionID" />
+          </Key>
+          <Property Name="TipoDireccionID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK_Direccion_TipoDireccion" FromRole="TipoDireccion" ToRole="Direccion" />
+        </EntityType>
+        <EntityType Name="TipoUbicacionGeografica">
+          <Key>
+            <PropertyRef Name="TipoUbicacionGeograficaID" />
+          </Key>
+          <Property Name="TipoUbicacionGeograficaID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UbicacionGeografica" Relationship="Self.FK_UbicacionGeografica_TipoUbicacionGeografica" FromRole="TipoUbicacionGeografica" ToRole="UbicacionGeografica" />
+        </EntityType>
+        <EntityType Name="UbicacionGeografica">
+          <Key>
+            <PropertyRef Name="UbicacionGeograficaID" />
+          </Key>
+          <Property Name="UbicacionGeograficaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoUbicacionGeograficaID" Type="Byte" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UbicacionGeograficaPadreID" Type="Int16" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK_Direccion_UbicacionGeografica" FromRole="UbicacionGeografica" ToRole="Direccion" />
+          <NavigationProperty Name="TipoUbicacionGeografica" Relationship="Self.FK_UbicacionGeografica_TipoUbicacionGeografica" FromRole="UbicacionGeografica" ToRole="TipoUbicacionGeografica" />
+          <NavigationProperty Name="UbicacionGeografica1" Relationship="Self.FK_UbicacionGeografica_UbicacionGeograficaIDPadreID" FromRole="UbicacionGeografica" ToRole="UbicacionGeografica1" />
+          <NavigationProperty Name="UbicacionGeografica2" Relationship="Self.FK_UbicacionGeografica_UbicacionGeograficaIDPadreID" FromRole="UbicacionGeografica1" ToRole="UbicacionGeografica" />
+        </EntityType>
+        <Association Name="FK_Direccion_TipoDireccion">
+          <End Role="TipoDireccion" Type="Self.TipoDireccion" Multiplicity="1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDireccion">
+              <PropertyRef Name="TipoDireccionID" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="TipoDireccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Direccion_UbicacionGeografica">
+          <End Role="UbicacionGeografica" Type="Self.UbicacionGeografica" Multiplicity="1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UbicacionGeografica">
+              <PropertyRef Name="UbicacionGeograficaID" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="UbicacionGeograficaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evento_LineaEvento">
+          <End Role="LineaEvento" Type="Self.LineaEvento" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineaEvento">
+              <PropertyRef Name="LineaEventoID" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="LineaEventoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_Evento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="Participante" Type="Self.Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="EventoID" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="EventoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UbicacionGeografica_TipoUbicacionGeografica">
+          <End Role="TipoUbicacionGeografica" Type="Self.TipoUbicacionGeografica" Multiplicity="1" />
+          <End Role="UbicacionGeografica" Type="Self.UbicacionGeografica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUbicacionGeografica">
+              <PropertyRef Name="TipoUbicacionGeograficaID" />
+            </Principal>
+            <Dependent Role="UbicacionGeografica">
+              <PropertyRef Name="TipoUbicacionGeograficaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UbicacionGeografica_UbicacionGeograficaIDPadreID">
+          <End Role="UbicacionGeografica" Type="Self.UbicacionGeografica" Multiplicity="0..1" />
+          <End Role="UbicacionGeografica1" Type="Self.UbicacionGeografica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UbicacionGeografica">
+              <PropertyRef Name="UbicacionGeograficaID" />
+            </Principal>
+            <Dependent Role="UbicacionGeografica1">
+              <PropertyRef Name="UbicacionGeograficaPadreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EventosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" />
+          <EntitySet Name="LineaEvento" EntityType="Self.LineaEvento" />
+          <EntitySet Name="Participante" EntityType="Self.Participante" />
+          <EntitySet Name="TipoDireccion" EntityType="Self.TipoDireccion" />
+          <EntitySet Name="TipoUbicacionGeografica" EntityType="Self.TipoUbicacionGeografica" />
+          <EntitySet Name="UbicacionGeografica" EntityType="Self.UbicacionGeografica" />
+          <AssociationSet Name="FK_Direccion_TipoDireccion" Association="Self.FK_Direccion_TipoDireccion">
+            <End Role="TipoDireccion" EntitySet="TipoDireccion" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Direccion_UbicacionGeografica" Association="Self.FK_Direccion_UbicacionGeografica">
+            <End Role="UbicacionGeografica" EntitySet="UbicacionGeografica" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evento_LineaEvento" Association="Self.FK_Evento_LineaEvento">
+            <End Role="LineaEvento" EntitySet="LineaEvento" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_Evento" Association="Self.FK_Participante_Evento">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Participante" EntitySet="Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UbicacionGeografica_TipoUbicacionGeografica" Association="Self.FK_UbicacionGeografica_TipoUbicacionGeografica">
+            <End Role="TipoUbicacionGeografica" EntitySet="TipoUbicacionGeografica" />
+            <End Role="UbicacionGeografica" EntitySet="UbicacionGeografica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UbicacionGeografica_UbicacionGeograficaIDPadreID" Association="Self.FK_UbicacionGeografica_UbicacionGeograficaIDPadreID">
+            <End Role="UbicacionGeografica" EntitySet="UbicacionGeografica" />
+            <End Role="UbicacionGeografica1" EntitySet="UbicacionGeografica" />
+          </AssociationSet>
+          <FunctionImport Name="Agregar_Participantes">
+            <Parameter Name="Rol" Mode="In" Type="String" />
+            <Parameter Name="EventoID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarEvento_ID" ReturnType="Collection(EventosModel.ConsultarEvento_ID_Result)">
+          <Parameter Name="ID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarEvento_PorFecha" ReturnType="Collection(EventosModel.ConsultarEvento_PorFecha_Result)">
+          <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarEvento_PorNombre" ReturnType="Collection(EventosModel.ConsultarEvento_PorNombre_Result)">
+          <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Eliminar_Participantes">
+          <Parameter Name="ParticipanteID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarEvento">
+          <Parameter Name="LineaEventoID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ListarEventos" ReturnType="Collection(EventosModel.ListarEventos_Result)" />
+          <FunctionImport Name="ListarTodosEventos" ReturnType="Collection(EventosModel.ListarTodosEventos_Result)" />
+          <FunctionImport Name="Modificar_Evento">
+            <Parameter Name="EventoID" Mode="In" Type="Int64" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="Modificar_Participantes">
+            <Parameter Name="ParticipanteID" Mode="In" Type="Int32" />
+            <Parameter Name="Rol" Mode="In" Type="String" />
+            <Parameter Name="EventoID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Agregar_Evento">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ConsultarEvento_ID_Result">
+          <Property Type="Int64" Name="EventoID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ConsultarEvento_PorFecha_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ConsultarEvento_PorNombre_Result">
+          <Property Type="Int64" Name="EventoID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListarEventos_Result">
+          <Property Type="Int64" Name="EventoID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListarTodosEventos_Result">
+          <Property Type="Int64" Name="EventoID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EventosModelStoreContainer" CdmEntityContainer="EventosEntities">
+          <EntitySetMapping Name="Direccion">
+            <EntityTypeMapping TypeName="EventosModel.Direccion">
+              <MappingFragment StoreEntitySet="Direccion">
+                <ScalarProperty Name="DireccionID" ColumnName="DireccionID" />
+                <ScalarProperty Name="Linea1" ColumnName="Linea1" />
+                <ScalarProperty Name="Linea2" ColumnName="Linea2" />
+                <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+                <ScalarProperty Name="TipoDireccionID" ColumnName="TipoDireccionID" />
+                <ScalarProperty Name="UbicacionGeograficaID" ColumnName="UbicacionGeograficaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evento">
+            <EntityTypeMapping TypeName="EventosModel.Evento">
+              <MappingFragment StoreEntitySet="Evento">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="LineaEventoID" ColumnName="LineaEventoID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineaEvento">
+            <EntityTypeMapping TypeName="EventosModel.LineaEvento">
+              <MappingFragment StoreEntitySet="LineaEvento">
+                <ScalarProperty Name="LineaEventoID" ColumnName="LineaEventoID" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participante">
+            <EntityTypeMapping TypeName="EventosModel.Participante">
+              <MappingFragment StoreEntitySet="Participante">
+                <ScalarProperty Name="ParticipanteID" ColumnName="ParticipanteID" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDireccion">
+            <EntityTypeMapping TypeName="EventosModel.TipoDireccion">
+              <MappingFragment StoreEntitySet="TipoDireccion">
+                <ScalarProperty Name="TipoDireccionID" ColumnName="TipoDireccionID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoUbicacionGeografica">
+            <EntityTypeMapping TypeName="EventosModel.TipoUbicacionGeografica">
+              <MappingFragment StoreEntitySet="TipoUbicacionGeografica">
+                <ScalarProperty Name="TipoUbicacionGeograficaID" ColumnName="TipoUbicacionGeograficaID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UbicacionGeografica">
+            <EntityTypeMapping TypeName="EventosModel.UbicacionGeografica">
+              <MappingFragment StoreEntitySet="UbicacionGeografica">
+                <ScalarProperty Name="UbicacionGeograficaID" ColumnName="UbicacionGeograficaID" />
+                <ScalarProperty Name="TipoUbicacionGeograficaID" ColumnName="TipoUbicacionGeograficaID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="UbicacionGeograficaPadreID" ColumnName="UbicacionGeograficaPadreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Agregar_Participantes" FunctionName="EventosModel.Store.Agregar_Participantes" />
+          <FunctionImportMapping FunctionImportName="ConsultarEvento_ID" FunctionName="EventosModel.Store.ConsultarEvento_ID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventosModel.ConsultarEvento_ID_Result">
+                <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarEvento_PorFecha" FunctionName="EventosModel.Store.ConsultarEvento_PorFecha">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventosModel.ConsultarEvento_PorFecha_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarEvento_PorNombre" FunctionName="EventosModel.Store.ConsultarEvento_PorNombre">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventosModel.ConsultarEvento_PorNombre_Result">
+                <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Eliminar_Participantes" FunctionName="EventosModel.Store.Eliminar_Participantes" />
+          <FunctionImportMapping FunctionImportName="EliminarEvento" FunctionName="EventosModel.Store.EliminarEvento" />
+          <FunctionImportMapping FunctionImportName="ListarEventos" FunctionName="EventosModel.Store.ListarEventos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventosModel.ListarEventos_Result">
+                <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarTodosEventos" FunctionName="EventosModel.Store.ListarTodosEventos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventosModel.ListarTodosEventos_Result">
+                <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Modificar_Evento" FunctionName="EventosModel.Store.Modificar_Evento" />
+          <FunctionImportMapping FunctionImportName="Modificar_Participantes" FunctionName="EventosModel.Store.Modificar_Participantes" />
+          <FunctionImportMapping FunctionImportName="Agregar_Evento" FunctionName="EventosModel.Store.Agregar_Evento" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,85 @@
+﻿body {
+    background-color: #FFFFC0;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+label {
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.card {
+    box-sizing: content-box;
+    margin-left: auto;
+    border: 2px solid #000000;
+    padding: 5px;
+    width: 100%;
+    max-width: 70%;
+    padding: 15px;
+    margin: auto;
+    background: #EFEFEF center;
+    background-size: 20% 20%;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+
+}
+
+h2 {
+    color: red;
+    font-family: 'Rufina';
+}
+
+h3 {
+    color: red;
+    font-family: 'Rufina';
+}
+
+nav {
+    color: #006600;
+    background-color: #006600;
+}
+
+footer {
+    color: #808080;
+    background-color: #808080;
+}
+
+.nav-item {
+    color: white;
+}
+
+.nav-link {
+    color: white;
+}
+
+    .nav-link:hover {
+        color:  white;
+        background-color: green;
+        border-radius: 10px;
+    }
+
+.navbar-nav > .active > a {
+    color: green;
+    background-color: #0B3F0A;
+}
+
+.nav-item:hover {
+    color: white;
+    border-radius: 10px;
+    background-color: green;
+}
+
+.nav-item .nav-link > :hover {
+    color: red;
+    background-color: green;
+}
+
+input:invalid {
+    color: red;
+}

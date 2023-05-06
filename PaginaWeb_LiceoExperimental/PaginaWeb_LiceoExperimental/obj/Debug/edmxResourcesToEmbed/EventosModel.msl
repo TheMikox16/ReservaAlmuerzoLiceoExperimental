@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EventosModelStoreContainer" CdmEntityContainer="EventosEntities">
+    <EntitySetMapping Name="Direccion">
+      <EntityTypeMapping TypeName="EventosModel.Direccion">
+        <MappingFragment StoreEntitySet="Direccion">
+          <ScalarProperty Name="DireccionID" ColumnName="DireccionID" />
+          <ScalarProperty Name="Linea1" ColumnName="Linea1" />
+          <ScalarProperty Name="Linea2" ColumnName="Linea2" />
+          <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+          <ScalarProperty Name="TipoDireccionID" ColumnName="TipoDireccionID" />
+          <ScalarProperty Name="UbicacionGeograficaID" ColumnName="UbicacionGeograficaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Evento">
+      <EntityTypeMapping TypeName="EventosModel.Evento">
+        <MappingFragment StoreEntitySet="Evento">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="LineaEventoID" ColumnName="LineaEventoID" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LineaEvento">
+      <EntityTypeMapping TypeName="EventosModel.LineaEvento">
+        <MappingFragment StoreEntitySet="LineaEvento">
+          <ScalarProperty Name="LineaEventoID" ColumnName="LineaEventoID" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participante">
+      <EntityTypeMapping TypeName="EventosModel.Participante">
+        <MappingFragment StoreEntitySet="Participante">
+          <ScalarProperty Name="ParticipanteID" ColumnName="ParticipanteID" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDireccion">
+      <EntityTypeMapping TypeName="EventosModel.TipoDireccion">
+        <MappingFragment StoreEntitySet="TipoDireccion">
+          <ScalarProperty Name="TipoDireccionID" ColumnName="TipoDireccionID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoUbicacionGeografica">
+      <EntityTypeMapping TypeName="EventosModel.TipoUbicacionGeografica">
+        <MappingFragment StoreEntitySet="TipoUbicacionGeografica">
+          <ScalarProperty Name="TipoUbicacionGeograficaID" ColumnName="TipoUbicacionGeograficaID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UbicacionGeografica">
+      <EntityTypeMapping TypeName="EventosModel.UbicacionGeografica">
+        <MappingFragment StoreEntitySet="UbicacionGeografica">
+          <ScalarProperty Name="UbicacionGeograficaID" ColumnName="UbicacionGeograficaID" />
+          <ScalarProperty Name="TipoUbicacionGeograficaID" ColumnName="TipoUbicacionGeograficaID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="UbicacionGeograficaPadreID" ColumnName="UbicacionGeograficaPadreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Agregar_Participantes" FunctionName="EventosModel.Store.Agregar_Participantes" />
+    <FunctionImportMapping FunctionImportName="ConsultarEvento_ID" FunctionName="EventosModel.Store.ConsultarEvento_ID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EventosModel.ConsultarEvento_ID_Result">
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarEvento_PorFecha" FunctionName="EventosModel.Store.ConsultarEvento_PorFecha">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EventosModel.ConsultarEvento_PorFecha_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarEvento_PorNombre" FunctionName="EventosModel.Store.ConsultarEvento_PorNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EventosModel.ConsultarEvento_PorNombre_Result">
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Eliminar_Participantes" FunctionName="EventosModel.Store.Eliminar_Participantes" />
+    <FunctionImportMapping FunctionImportName="EliminarEvento" FunctionName="EventosModel.Store.EliminarEvento" />
+    <FunctionImportMapping FunctionImportName="ListarEventos" FunctionName="EventosModel.Store.ListarEventos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EventosModel.ListarEventos_Result">
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarTodosEventos" FunctionName="EventosModel.Store.ListarTodosEventos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EventosModel.ListarTodosEventos_Result">
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Modificar_Evento" FunctionName="EventosModel.Store.Modificar_Evento" />
+    <FunctionImportMapping FunctionImportName="Modificar_Participantes" FunctionName="EventosModel.Store.Modificar_Participantes" />
+    <FunctionImportMapping FunctionImportName="Agregar_Evento" FunctionName="EventosModel.Store.Agregar_Evento" />
+  </EntityContainerMapping>
+</Mapping>

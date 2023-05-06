@@ -1,0 +1,822 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PaginaWebModelStoreContainer" CdmEntityContainer="PaginaWebEntities">
+    <EntitySetMapping Name="CategoriaPlatillo">
+      <EntityTypeMapping TypeName="PaginaWebModel.CategoriaPlatillo">
+        <MappingFragment StoreEntitySet="CategoriaPlatillo">
+          <ScalarProperty Name="CategoriaPlatilloID" ColumnName="CategoriaPlatilloID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="CategoriaPlatilloPadreID" ColumnName="CategoriaPlatilloPadreID" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Moneda">
+      <EntityTypeMapping TypeName="PaginaWebModel.Moneda">
+        <MappingFragment StoreEntitySet="Moneda">
+          <ScalarProperty Name="MonedaID" ColumnName="MonedaID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ISOALPHA2" ColumnName="ISOALPHA2" />
+          <ScalarProperty Name="ISOALPHA3" ColumnName="ISOALPHA3" />
+          <ScalarProperty Name="PrecioID" ColumnName="PrecioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Platillo">
+      <EntityTypeMapping TypeName="PaginaWebModel.Platillo">
+        <MappingFragment StoreEntitySet="Platillo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Fotografia" ColumnName="Fotografia" />
+          <ScalarProperty Name="PrecioID" ColumnName="PrecioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlatilloDia">
+      <EntityTypeMapping TypeName="PaginaWebModel.PlatilloDia">
+        <MappingFragment StoreEntitySet="PlatilloDia">
+          <ScalarProperty Name="PlatilloDiaID" ColumnName="PlatilloDiaID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Precio">
+      <EntityTypeMapping TypeName="PaginaWebModel.Precio">
+        <MappingFragment StoreEntitySet="Precio">
+          <ScalarProperty Name="PrecioID" ColumnName="PrecioID" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reserva">
+      <EntityTypeMapping TypeName="PaginaWebModel.Reserva">
+        <MappingFragment StoreEntitySet="Reserva">
+          <ScalarProperty Name="ReservaID" ColumnName="ReservaID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PlatilloDiaID" ColumnName="PlatilloDiaID" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoCambio">
+      <EntityTypeMapping TypeName="PaginaWebModel.TipoCambio">
+        <MappingFragment StoreEntitySet="TipoCambio">
+          <ScalarProperty Name="TipoCambioID" ColumnName="TipoCambioID" />
+          <ScalarProperty Name="MontoCompra" ColumnName="MontoCompra" />
+          <ScalarProperty Name="MontoVenta" ColumnName="MontoVenta" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="MonedaOrigenID" ColumnName="MonedaOrigenID" />
+          <ScalarProperty Name="MonedaDestinoID" ColumnName="MonedaDestinoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genero">
+      <EntityTypeMapping TypeName="PaginaWebModel.Genero">
+        <MappingFragment StoreEntitySet="Genero">
+          <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IdentificadorPersona">
+      <EntityTypeMapping TypeName="PaginaWebModel.IdentificadorPersona">
+        <MappingFragment StoreEntitySet="IdentificadorPersona">
+          <ScalarProperty Name="IdentificadorPersonaID" ColumnName="IdentificadorPersonaID" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="TipoIdentificadorPersonaID" ColumnName="TipoIdentificadorPersonaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MecanismoDeContacto">
+      <EntityTypeMapping TypeName="PaginaWebModel.MecanismoDeContacto">
+        <MappingFragment StoreEntitySet="MecanismoDeContacto">
+          <ScalarProperty Name="MecanismoDeContactoID" ColumnName="MecanismoDeContactoID" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="TipoMecanismoDeContactoID" ColumnName="TipoMecanismoDeContactoID" />
+          <ScalarProperty Name="TipoDeTelefonoID" ColumnName="TipoDeTelefonoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nacionalidad">
+      <EntityTypeMapping TypeName="PaginaWebModel.Nacionalidad">
+        <MappingFragment StoreEntitySet="Nacionalidad">
+          <ScalarProperty Name="NacionalidadID" ColumnName="NacionalidadID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persona">
+      <EntityTypeMapping TypeName="PaginaWebModel.Persona">
+        <MappingFragment StoreEntitySet="Persona">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+          <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+          <ScalarProperty Name="NacionalidadID" ColumnName="NacionalidadID" />
+          <ScalarProperty Name="ParticipanteID" ColumnName="ParticipanteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDeTelefono">
+      <EntityTypeMapping TypeName="PaginaWebModel.TipoDeTelefono">
+        <MappingFragment StoreEntitySet="TipoDeTelefono">
+          <ScalarProperty Name="TipoDeTelefonoID" ColumnName="TipoDeTelefonoID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoIdentificadorPersona">
+      <EntityTypeMapping TypeName="PaginaWebModel.TipoIdentificadorPersona">
+        <MappingFragment StoreEntitySet="TipoIdentificadorPersona">
+          <ScalarProperty Name="TipoIdentificadorPersonaID" ColumnName="TipoIdentificadorPersonaID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoMecanismoDeContacto">
+      <EntityTypeMapping TypeName="PaginaWebModel.TipoMecanismoDeContacto">
+        <MappingFragment StoreEntitySet="TipoMecanismoDeContacto">
+          <ScalarProperty Name="TipoMecanismoDeContactoID" ColumnName="TipoMecanismoDeContactoID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="PaginaWebModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PaginaWebModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesores">
+      <EntityTypeMapping TypeName="PaginaWebModel.Profesores">
+        <MappingFragment StoreEntitySet="Profesores">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="FK_Persona_ID" ColumnName="FK_Persona_ID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="NumeroTelefono" ColumnName="NumeroTelefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seccion">
+      <EntityTypeMapping TypeName="PaginaWebModel.Seccion">
+        <MappingFragment StoreEntitySet="Seccion">
+          <ScalarProperty Name="SeccionID" ColumnName="SeccionID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Direccion">
+      <EntityTypeMapping TypeName="PaginaWebModel.Direccion">
+        <MappingFragment StoreEntitySet="Direccion">
+          <ScalarProperty Name="DireccionID" ColumnName="DireccionID" />
+          <ScalarProperty Name="Linea1" ColumnName="Linea1" />
+          <ScalarProperty Name="Linea2" ColumnName="Linea2" />
+          <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+          <ScalarProperty Name="TipoDireccionID" ColumnName="TipoDireccionID" />
+          <ScalarProperty Name="UbicacionGeograficaID" ColumnName="UbicacionGeograficaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Evento">
+      <EntityTypeMapping TypeName="PaginaWebModel.Evento">
+        <MappingFragment StoreEntitySet="Evento">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="LineaEventoID" ColumnName="LineaEventoID" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LineaEvento">
+      <EntityTypeMapping TypeName="PaginaWebModel.LineaEvento">
+        <MappingFragment StoreEntitySet="LineaEvento">
+          <ScalarProperty Name="LineaEventoID" ColumnName="LineaEventoID" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participante">
+      <EntityTypeMapping TypeName="PaginaWebModel.Participante">
+        <MappingFragment StoreEntitySet="Participante">
+          <ScalarProperty Name="ParticipanteID" ColumnName="ParticipanteID" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDireccion">
+      <EntityTypeMapping TypeName="PaginaWebModel.TipoDireccion">
+        <MappingFragment StoreEntitySet="TipoDireccion">
+          <ScalarProperty Name="TipoDireccionID" ColumnName="TipoDireccionID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoUbicacionGeografica">
+      <EntityTypeMapping TypeName="PaginaWebModel.TipoUbicacionGeografica">
+        <MappingFragment StoreEntitySet="TipoUbicacionGeografica">
+          <ScalarProperty Name="TipoUbicacionGeograficaID" ColumnName="TipoUbicacionGeograficaID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UbicacionGeografica">
+      <EntityTypeMapping TypeName="PaginaWebModel.UbicacionGeografica">
+        <MappingFragment StoreEntitySet="UbicacionGeografica">
+          <ScalarProperty Name="UbicacionGeograficaID" ColumnName="UbicacionGeograficaID" />
+          <ScalarProperty Name="TipoUbicacionGeograficaID" ColumnName="TipoUbicacionGeograficaID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="UbicacionGeograficaPadreID" ColumnName="UbicacionGeograficaPadreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LineaNoticia">
+      <EntityTypeMapping TypeName="PaginaWebModel.LineaNoticia">
+        <MappingFragment StoreEntitySet="LineaNoticia">
+          <ScalarProperty Name="LineaNoticiaID" ColumnName="LineaNoticiaID" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Noticia">
+      <EntityTypeMapping TypeName="PaginaWebModel.Noticia">
+        <MappingFragment StoreEntitySet="Noticia">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="LineaNoticiaID" ColumnName="LineaNoticiaID" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prioridad">
+      <EntityTypeMapping TypeName="PaginaWebModel.Prioridad">
+        <MappingFragment StoreEntitySet="Prioridad">
+          <ScalarProperty Name="PrioridadID" ColumnName="PrioridadID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ActualizarBeca" FunctionName="PaginaWebModel.Store.ActualizarBeca" />
+    <FunctionImportMapping FunctionImportName="Agregar_Evento" FunctionName="PaginaWebModel.Store.Agregar_Evento" />
+    <FunctionImportMapping FunctionImportName="Agregar_Modificar_Platillo" FunctionName="PaginaWebModel.Store.Agregar_Modificar_Platillo" />
+    <FunctionImportMapping FunctionImportName="Agregar_Noticia" FunctionName="PaginaWebModel.Store.Agregar_Noticia" />
+    <FunctionImportMapping FunctionImportName="Agregar_Participantes" FunctionName="PaginaWebModel.Store.Agregar_Participantes" />
+    <FunctionImportMapping FunctionImportName="Agregar_Reserva" FunctionName="PaginaWebModel.Store.Agregar_Reserva" />
+    <FunctionImportMapping FunctionImportName="AgregarPrecio_ModificarPrecio" FunctionName="PaginaWebModel.Store.AgregarPrecio_ModificarPrecio" />
+    <FunctionImportMapping FunctionImportName="AgregarProfesor" FunctionName="PaginaWebModel.Store.AgregarProfesor" />
+    <FunctionImportMapping FunctionImportName="AgregarSeccion" FunctionName="PaginaWebModel.Store.AgregarSeccion" />
+    <FunctionImportMapping FunctionImportName="BuscarEstudiante" FunctionName="PaginaWebModel.Store.BuscarEstudiante">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.BuscarEstudiante_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarEvento_ID" FunctionName="PaginaWebModel.Store.ConsultarEvento_ID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarEvento_ID_Result">
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarEvento_PorFecha" FunctionName="PaginaWebModel.Store.ConsultarEvento_PorFecha">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarEvento_PorFecha_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarEvento_PorNombre" FunctionName="PaginaWebModel.Store.ConsultarEvento_PorNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarEvento_PorNombre_Result">
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarNoticia_ID" FunctionName="PaginaWebModel.Store.ConsultarNoticia_ID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarNoticia_ID_Result">
+          <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarNoticia_PorFecha" FunctionName="PaginaWebModel.Store.ConsultarNoticia_PorFecha">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarNoticia_PorFecha_Result">
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarNoticia_PorTitulo" FunctionName="PaginaWebModel.Store.ConsultarNoticia_PorTitulo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarNoticia_PorTitulo_Result">
+          <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarPlatilloPorNombre" FunctionName="PaginaWebModel.Store.ConsultarPlatilloPorNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarPlatilloPorNombre_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion1" ColumnName="Descripcion1" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Fotografia" ColumnName="Fotografia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarPlatoDia" FunctionName="PaginaWebModel.Store.ConsultarPlatoDia">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarPlatoDia_Result">
+          <ScalarProperty Name="PlatilloDiaID" ColumnName="PlatilloDiaID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarProfesor_ID" FunctionName="PaginaWebModel.Store.ConsultarProfesor_ID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarProfesor_ID_Result">
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="NumeroTelefono" ColumnName="NumeroTelefono" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarProfesor_Nombre" FunctionName="PaginaWebModel.Store.ConsultarProfesor_Nombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarProfesor_Nombre_Result">
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="NumeroTelefono" ColumnName="NumeroTelefono" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarReservas_PorFecha_Pendientes" FunctionName="PaginaWebModel.Store.ConsultarReservas_PorFecha_Pendientes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarReservas_PorFecha_Pendientes_Result">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarReservas_PorNombre" FunctionName="PaginaWebModel.Store.ConsultarReservas_PorNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarReservas_PorNombre_Result">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarReservasPorID" FunctionName="PaginaWebModel.Store.ConsultarReservasPorID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarReservasPorID_Result">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarSeccion_Descripcion" FunctionName="PaginaWebModel.Store.ConsultarSeccion_Descripcion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarSeccion_Descripcion_Result">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="SeccionID" ColumnName="SeccionID" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarSeccion_ID" FunctionName="PaginaWebModel.Store.ConsultarSeccion_ID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarSeccion_ID_Result">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="SeccionID" ColumnName="SeccionID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="DecripcionProfesor" ColumnName="DecripcionProfesor" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="NumeroTelefono" ColumnName="NumeroTelefono" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarUsuario" FunctionName="PaginaWebModel.Store.ConsultarUsuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarUsuario_Result">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarUsuario_ID" FunctionName="PaginaWebModel.Store.ConsultarUsuario_ID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ConsultarUsuario_ID_Result">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+          <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+          <ScalarProperty Name="ValorID" ColumnName="ValorID" />
+          <ScalarProperty Name="TipoIdentificadorPersonaID" ColumnName="TipoIdentificadorPersonaID" />
+          <ScalarProperty Name="ValorContacto" ColumnName="ValorContacto" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Eliminar_Participantes" FunctionName="PaginaWebModel.Store.Eliminar_Participantes" />
+    <FunctionImportMapping FunctionImportName="EliminarEvento" FunctionName="PaginaWebModel.Store.EliminarEvento" />
+    <FunctionImportMapping FunctionImportName="EliminarLineaNoticia" FunctionName="PaginaWebModel.Store.EliminarLineaNoticia" />
+    <FunctionImportMapping FunctionImportName="EliminarNoticia" FunctionName="PaginaWebModel.Store.EliminarNoticia" />
+    <FunctionImportMapping FunctionImportName="EliminarPlatillo" FunctionName="PaginaWebModel.Store.EliminarPlatillo" />
+    <FunctionImportMapping FunctionImportName="EliminarProfesor" FunctionName="PaginaWebModel.Store.EliminarProfesor" />
+    <FunctionImportMapping FunctionImportName="EliminarSeccion" FunctionName="PaginaWebModel.Store.EliminarSeccion" />
+    <FunctionImportMapping FunctionImportName="EliminarUsuario" FunctionName="PaginaWebModel.Store.EliminarUsuario" />
+    <FunctionImportMapping FunctionImportName="EntregarPlatillo" FunctionName="PaginaWebModel.Store.EntregarPlatillo" />
+    <FunctionImportMapping FunctionImportName="Ingresar" FunctionName="PaginaWebModel.Store.Ingresar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.Ingresar_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Insertar_Usuario" FunctionName="PaginaWebModel.Store.Insertar_Usuario" />
+    <FunctionImportMapping FunctionImportName="ListarBecados" FunctionName="PaginaWebModel.Store.ListarBecados">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarBecados_Result">
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListaReserva" FunctionName="PaginaWebModel.Store.ListaReserva">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListaReserva_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarEstudiantes" FunctionName="PaginaWebModel.Store.ListarEstudiantes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarEstudiantes_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarEstudiantesID" FunctionName="PaginaWebModel.Store.ListarEstudiantesID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarEstudiantesID_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarEstudiantesNombre" FunctionName="PaginaWebModel.Store.ListarEstudiantesNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarEstudiantesNombre_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Becado" ColumnName="Becado" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarEventos" FunctionName="PaginaWebModel.Store.ListarEventos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarEventos_Result">
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecados" FunctionName="PaginaWebModel.Store.ListarNoBecados">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarNoBecados_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecados2" FunctionName="PaginaWebModel.Store.ListarNoBecados2">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarNoBecados2_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecadosID" FunctionName="PaginaWebModel.Store.ListarNoBecadosID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarNoBecadosID_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoBecadosNombre" FunctionName="PaginaWebModel.Store.ListarNoBecadosNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarNoBecadosNombre_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarNoticias" FunctionName="PaginaWebModel.Store.ListarNoticias">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarNoticias_Result">
+          <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarProfesor_PorNombre" FunctionName="PaginaWebModel.Store.ListarProfesor_PorNombre">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarProfesor_PorNombre_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarProfesores" FunctionName="PaginaWebModel.Store.ListarProfesores">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarProfesores_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarSecciones" FunctionName="PaginaWebModel.Store.ListarSecciones">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarSecciones_Result">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="SeccionID" ColumnName="SeccionID" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="ProfesorID" ColumnName="ProfesorID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarTodasNoticias" FunctionName="PaginaWebModel.Store.ListarTodasNoticias">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarTodasNoticias_Result">
+          <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarTodosEventos" FunctionName="PaginaWebModel.Store.ListarTodosEventos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarTodosEventos_Result">
+          <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarUsuarios" FunctionName="PaginaWebModel.Store.ListarUsuarios">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.ListarUsuarios_Result">
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Permisos" ColumnName="Permisos" />
+          <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Modificar_Evento" FunctionName="PaginaWebModel.Store.Modificar_Evento" />
+    <FunctionImportMapping FunctionImportName="Modificar_Noticia" FunctionName="PaginaWebModel.Store.Modificar_Noticia" />
+    <FunctionImportMapping FunctionImportName="Modificar_Participantes" FunctionName="PaginaWebModel.Store.Modificar_Participantes" />
+    <FunctionImportMapping FunctionImportName="ModificarEstadoReserva" FunctionName="PaginaWebModel.Store.ModificarEstadoReserva" />
+    <FunctionImportMapping FunctionImportName="ModificarProfesor" FunctionName="PaginaWebModel.Store.ModificarProfesor" />
+    <FunctionImportMapping FunctionImportName="ModificarSeccion" FunctionName="PaginaWebModel.Store.ModificarSeccion" />
+    <FunctionImportMapping FunctionImportName="ModificarUsuario" FunctionName="PaginaWebModel.Store.ModificarUsuario" />
+    <FunctionImportMapping FunctionImportName="PermisoReserva" FunctionName="PaginaWebModel.Store.PermisoReserva" />
+    <FunctionImportMapping FunctionImportName="SeleccionarPlatillo" FunctionName="PaginaWebModel.Store.SeleccionarPlatillo" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="PaginaWebModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="PaginaWebModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="PaginaWebModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="PaginaWebModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="PaginaWebModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="PaginaWebModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="PaginaWebModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="VerificarBecado" FunctionName="PaginaWebModel.Store.VerificarBecado" />
+    <FunctionImportMapping FunctionImportName="VerificarPlatoDia" FunctionName="PaginaWebModel.Store.VerificarPlatoDia">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.VerificarPlatoDia_Result">
+          <ScalarProperty Name="PlatilloDiaID" ColumnName="PlatilloDiaID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="PlatilloID" ColumnName="PlatilloID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerificarReserva" FunctionName="PaginaWebModel.Store.VerificarReserva">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PaginaWebModel.VerificarReserva_Result">
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
+          <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+          <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

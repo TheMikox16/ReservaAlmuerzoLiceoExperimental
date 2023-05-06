@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NoticiasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LineaNoticia">
+          <Key>
+            <PropertyRef Name="LineaNoticiaID" />
+          </Key>
+          <Property Name="LineaNoticiaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Noticia">
+          <Key>
+            <PropertyRef Name="NoticiaID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NoticiaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="LineaNoticiaID" Type="bigint" />
+          <Property Name="UsuarioID" Type="bigint" />
+          <Property Name="Archivo" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'db_a8ac14_experimentalweb.Noticia.Prioridad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Prioridad">
+          <Key>
+            <PropertyRef Name="PrioridadID" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="PrioridadID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Noticia_LineaNoticia">
+          <End Role="LineaNoticia" Type="Self.LineaNoticia" Multiplicity="0..1" />
+          <End Role="Noticia" Type="Self.Noticia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineaNoticia">
+              <PropertyRef Name="LineaNoticiaID" />
+            </Principal>
+            <Dependent Role="Noticia">
+              <PropertyRef Name="LineaNoticiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Agregar_Noticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Archivo" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="ConsultarNoticia_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarNoticia_PorFecha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ConsultarNoticia_PorTitulo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="EliminarLineaNoticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LineaNoticiaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarNoticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LineaNoticiaID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ListarNoticias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListarTodasNoticias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Modificar_Noticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NoticiaID" Type="bigint" Mode="In" />
+          <Parameter Name="Titulo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Archivo" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="NoticiasModelStoreContainer">
+          <EntitySet Name="LineaNoticia" EntityType="Self.LineaNoticia" Schema="Noticia" store:Type="Tables" />
+          <EntitySet Name="Noticia" EntityType="Self.Noticia" Schema="Noticia" store:Type="Tables" />
+          <EntitySet Name="Prioridad" EntityType="Self.Prioridad" store:Type="Tables" store:Schema="Noticia">
+            <DefiningQuery>SELECT 
+    [Prioridad].[PrioridadID] AS [PrioridadID], 
+    [Prioridad].[Descripcion] AS [Descripcion]
+    FROM [Noticia].[Prioridad] AS [Prioridad]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Noticia_LineaNoticia" Association="Self.FK_Noticia_LineaNoticia">
+            <End Role="LineaNoticia" EntitySet="LineaNoticia" />
+            <End Role="Noticia" EntitySet="Noticia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NoticiasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LineaNoticia">
+          <Key>
+            <PropertyRef Name="LineaNoticiaID" />
+          </Key>
+          <Property Name="LineaNoticiaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Noticia" Relationship="Self.FK_Noticia_LineaNoticia" FromRole="LineaNoticia" ToRole="Noticia" />
+        </EntityType>
+        <EntityType Name="Noticia">
+          <Key>
+            <PropertyRef Name="NoticiaID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="NoticiaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LineaNoticiaID" Type="Int64" />
+          <Property Name="UsuarioID" Type="Int64" />
+          <Property Name="Archivo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="LineaNoticia" Relationship="Self.FK_Noticia_LineaNoticia" FromRole="Noticia" ToRole="LineaNoticia" />
+        </EntityType>
+        <EntityType Name="Prioridad">
+          <Key>
+            <PropertyRef Name="PrioridadID" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="PrioridadID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Noticia_LineaNoticia">
+          <End Role="LineaNoticia" Type="Self.LineaNoticia" Multiplicity="0..1" />
+          <End Role="Noticia" Type="Self.Noticia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineaNoticia">
+              <PropertyRef Name="LineaNoticiaID" />
+            </Principal>
+            <Dependent Role="Noticia">
+              <PropertyRef Name="LineaNoticiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NoticiasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LineaNoticia" EntityType="Self.LineaNoticia" />
+          <EntitySet Name="Noticia" EntityType="Self.Noticia" />
+          <EntitySet Name="Prioridad" EntityType="Self.Prioridad" />
+          <AssociationSet Name="FK_Noticia_LineaNoticia" Association="Self.FK_Noticia_LineaNoticia">
+            <End Role="LineaNoticia" EntitySet="LineaNoticia" />
+            <End Role="Noticia" EntitySet="Noticia" />
+          </AssociationSet>
+          <FunctionImport Name="Agregar_Noticia">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+            <Parameter Name="Archivo" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarNoticia_ID" ReturnType="Collection(NoticiasModel.ConsultarNoticia_ID_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarNoticia_PorFecha" ReturnType="Collection(NoticiasModel.ConsultarNoticia_PorFecha_Result)">
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarNoticia_PorTitulo" ReturnType="Collection(NoticiasModel.ConsultarNoticia_PorTitulo_Result)">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarLineaNoticia">
+            <Parameter Name="LineaNoticiaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarNoticia">
+            <Parameter Name="LineaNoticiaID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ListarNoticias" ReturnType="Collection(NoticiasModel.ListarNoticias_Result)" />
+          <FunctionImport Name="ListarTodasNoticias" ReturnType="Collection(NoticiasModel.ListarTodasNoticias_Result)" />
+          <FunctionImport Name="Modificar_Noticia">
+            <Parameter Name="NoticiaID" Mode="In" Type="Int64" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+            <Parameter Name="Archivo" Mode="In" Type="Binary" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ConsultarNoticia_ID_Result">
+          <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+          <Property Type="Binary" Name="Archivo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ConsultarNoticia_PorFecha_Result">
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ConsultarNoticia_PorTitulo_Result">
+          <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListarNoticias_Result">
+          <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+          <Property Type="Binary" Name="Archivo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListarTodasNoticias_Result">
+          <Property Type="Int64" Name="NoticiaID" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="3000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NoticiasModelStoreContainer" CdmEntityContainer="NoticiasEntities">
+          <EntitySetMapping Name="LineaNoticia">
+            <EntityTypeMapping TypeName="NoticiasModel.LineaNoticia">
+              <MappingFragment StoreEntitySet="LineaNoticia">
+                <ScalarProperty Name="LineaNoticiaID" ColumnName="LineaNoticiaID" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Noticia">
+            <EntityTypeMapping TypeName="NoticiasModel.Noticia">
+              <MappingFragment StoreEntitySet="Noticia">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="LineaNoticiaID" ColumnName="LineaNoticiaID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prioridad">
+            <EntityTypeMapping TypeName="NoticiasModel.Prioridad">
+              <MappingFragment StoreEntitySet="Prioridad">
+                <ScalarProperty Name="PrioridadID" ColumnName="PrioridadID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Agregar_Noticia" FunctionName="NoticiasModel.Store.Agregar_Noticia" />
+          <FunctionImportMapping FunctionImportName="ConsultarNoticia_ID" FunctionName="NoticiasModel.Store.ConsultarNoticia_ID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NoticiasModel.ConsultarNoticia_ID_Result">
+                <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarNoticia_PorFecha" FunctionName="NoticiasModel.Store.ConsultarNoticia_PorFecha">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NoticiasModel.ConsultarNoticia_PorFecha_Result">
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarNoticia_PorTitulo" FunctionName="NoticiasModel.Store.ConsultarNoticia_PorTitulo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NoticiasModel.ConsultarNoticia_PorTitulo_Result">
+                <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EliminarLineaNoticia" FunctionName="NoticiasModel.Store.EliminarLineaNoticia" />
+          <FunctionImportMapping FunctionImportName="EliminarNoticia" FunctionName="NoticiasModel.Store.EliminarNoticia" />
+          <FunctionImportMapping FunctionImportName="ListarNoticias" FunctionName="NoticiasModel.Store.ListarNoticias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NoticiasModel.ListarNoticias_Result">
+                <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarTodasNoticias" FunctionName="NoticiasModel.Store.ListarTodasNoticias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NoticiasModel.ListarTodasNoticias_Result">
+                <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Modificar_Noticia" FunctionName="NoticiasModel.Store.Modificar_Noticia" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NoticiasModelStoreContainer" CdmEntityContainer="NoticiasEntities">
+    <EntitySetMapping Name="LineaNoticia">
+      <EntityTypeMapping TypeName="NoticiasModel.LineaNoticia">
+        <MappingFragment StoreEntitySet="LineaNoticia">
+          <ScalarProperty Name="LineaNoticiaID" ColumnName="LineaNoticiaID" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Noticia">
+      <EntityTypeMapping TypeName="NoticiasModel.Noticia">
+        <MappingFragment StoreEntitySet="Noticia">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="LineaNoticiaID" ColumnName="LineaNoticiaID" />
+          <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prioridad">
+      <EntityTypeMapping TypeName="NoticiasModel.Prioridad">
+        <MappingFragment StoreEntitySet="Prioridad">
+          <ScalarProperty Name="PrioridadID" ColumnName="PrioridadID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Agregar_Noticia" FunctionName="NoticiasModel.Store.Agregar_Noticia" />
+    <FunctionImportMapping FunctionImportName="ConsultarNoticia_ID" FunctionName="NoticiasModel.Store.ConsultarNoticia_ID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NoticiasModel.ConsultarNoticia_ID_Result">
+          <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarNoticia_PorFecha" FunctionName="NoticiasModel.Store.ConsultarNoticia_PorFecha">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NoticiasModel.ConsultarNoticia_PorFecha_Result">
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ConsultarNoticia_PorTitulo" FunctionName="NoticiasModel.Store.ConsultarNoticia_PorTitulo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NoticiasModel.ConsultarNoticia_PorTitulo_Result">
+          <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EliminarLineaNoticia" FunctionName="NoticiasModel.Store.EliminarLineaNoticia" />
+    <FunctionImportMapping FunctionImportName="EliminarNoticia" FunctionName="NoticiasModel.Store.EliminarNoticia" />
+    <FunctionImportMapping FunctionImportName="ListarNoticias" FunctionName="NoticiasModel.Store.ListarNoticias">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NoticiasModel.ListarNoticias_Result">
+          <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarTodasNoticias" FunctionName="NoticiasModel.Store.ListarTodasNoticias">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NoticiasModel.ListarTodasNoticias_Result">
+          <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Modificar_Noticia" FunctionName="NoticiasModel.Store.Modificar_Noticia" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2ffc0c93e95d4436ac82049ccb2243cf" Name="Diagram1">
+        <EntityTypeShape EntityType="UsuariosModel.Genero" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UsuariosModel.IdentificadorPersona" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UsuariosModel.MecanismoDeContacto" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UsuariosModel.Nacionalidad" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UsuariosModel.Persona" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="UsuariosModel.TipoDeTelefono" Width="1.5" PointX="7.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UsuariosModel.TipoIdentificadorPersona" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UsuariosModel.TipoMecanismoDeContacto" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UsuariosModel.Usuario" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="UsuariosModel.FK_Persona_Genero" ManuallyRouted="false" />
+        <AssociationConnector Association="UsuariosModel.FK_IdentificadorPersona_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="UsuariosModel.FK_IdentificadorPersona_TipoIdentificadorPersona" ManuallyRouted="false" />
+        <AssociationConnector Association="UsuariosModel.FK_MecanismoDeContacto_Persons" ManuallyRouted="false" />
+        <AssociationConnector Association="UsuariosModel.FK_MecanismoDeContacto_TipoDeTelefono" ManuallyRouted="false" />
+        <AssociationConnector Association="UsuariosModel.FK_MecanismoDeContacto_TipoMecanismoDeContacto" ManuallyRouted="false" />
+        <AssociationConnector Association="UsuariosModel.FK_Persona_Nacionalidad" ManuallyRouted="false" />
+        <AssociationConnector Association="UsuariosModel.FK__Usuario__FK_Pers__2FCF1A8A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

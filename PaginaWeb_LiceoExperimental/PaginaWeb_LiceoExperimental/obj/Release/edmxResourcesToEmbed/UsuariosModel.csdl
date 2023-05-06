@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UsuariosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Genero">
+    <Key>
+      <PropertyRef Name="GeneroID" />
+    </Key>
+    <Property Name="GeneroID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_Genero" FromRole="Genero" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="IdentificadorPersona">
+    <Key>
+      <PropertyRef Name="IdentificadorPersonaID" />
+    </Key>
+    <Property Name="IdentificadorPersonaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Valor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FechaVencimiento" Type="DateTime" Precision="0" />
+    <Property Name="PersonaID" Type="Int64" Nullable="false" />
+    <Property Name="TipoIdentificadorPersonaID" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_IdentificadorPersona_Persona" FromRole="IdentificadorPersona" ToRole="Persona" />
+    <NavigationProperty Name="TipoIdentificadorPersona" Relationship="Self.FK_IdentificadorPersona_TipoIdentificadorPersona" FromRole="IdentificadorPersona" ToRole="TipoIdentificadorPersona" />
+  </EntityType>
+  <EntityType Name="MecanismoDeContacto">
+    <Key>
+      <PropertyRef Name="MecanismoDeContactoID" />
+    </Key>
+    <Property Name="MecanismoDeContactoID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Valor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Prioridad" Type="Byte" Nullable="false" />
+    <Property Name="PersonaID" Type="Int64" Nullable="false" />
+    <Property Name="TipoMecanismoDeContactoID" Type="Byte" Nullable="false" />
+    <Property Name="TipoDeTelefonoID" Type="Byte" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_MecanismoDeContacto_Persons" FromRole="MecanismoDeContacto" ToRole="Persona" />
+    <NavigationProperty Name="TipoDeTelefono" Relationship="Self.FK_MecanismoDeContacto_TipoDeTelefono" FromRole="MecanismoDeContacto" ToRole="TipoDeTelefono" />
+    <NavigationProperty Name="TipoMecanismoDeContacto" Relationship="Self.FK_MecanismoDeContacto_TipoMecanismoDeContacto" FromRole="MecanismoDeContacto" ToRole="TipoMecanismoDeContacto" />
+  </EntityType>
+  <EntityType Name="Nacionalidad">
+    <Key>
+      <PropertyRef Name="NacionalidadID" />
+    </Key>
+    <Property Name="NacionalidadID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_Nacionalidad" FromRole="Nacionalidad" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="PersonaID" />
+    </Key>
+    <Property Name="PersonaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PrimerNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SegundoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+    <Property Name="LugarNacimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="GeneroID" Type="Byte" />
+    <Property Name="NacionalidadID" Type="Byte" />
+    <Property Name="ParticipanteID" Type="Int32" />
+    <NavigationProperty Name="Genero" Relationship="Self.FK_Persona_Genero" FromRole="Persona" ToRole="Genero" />
+    <NavigationProperty Name="IdentificadorPersona" Relationship="Self.FK_IdentificadorPersona_Persona" FromRole="Persona" ToRole="IdentificadorPersona" />
+    <NavigationProperty Name="MecanismoDeContacto" Relationship="Self.FK_MecanismoDeContacto_Persons" FromRole="Persona" ToRole="MecanismoDeContacto" />
+    <NavigationProperty Name="Nacionalidad" Relationship="Self.FK_Persona_Nacionalidad" FromRole="Persona" ToRole="Nacionalidad" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__FK_Pers__2FCF1A8A" FromRole="Persona" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="TipoDeTelefono">
+    <Key>
+      <PropertyRef Name="TipoDeTelefonoID" />
+    </Key>
+    <Property Name="TipoDeTelefonoID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MecanismoDeContacto" Relationship="Self.FK_MecanismoDeContacto_TipoDeTelefono" FromRole="TipoDeTelefono" ToRole="MecanismoDeContacto" />
+  </EntityType>
+  <EntityType Name="TipoIdentificadorPersona">
+    <Key>
+      <PropertyRef Name="TipoIdentificadorPersonaID" />
+    </Key>
+    <Property Name="TipoIdentificadorPersonaID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="IdentificadorPersona" Relationship="Self.FK_IdentificadorPersona_TipoIdentificadorPersona" FromRole="TipoIdentificadorPersona" ToRole="IdentificadorPersona" />
+  </EntityType>
+  <EntityType Name="TipoMecanismoDeContacto">
+    <Key>
+      <PropertyRef Name="TipoMecanismoDeContactoID" />
+    </Key>
+    <Property Name="TipoMecanismoDeContactoID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MecanismoDeContacto" Relationship="Self.FK_MecanismoDeContacto_TipoMecanismoDeContacto" FromRole="TipoMecanismoDeContacto" ToRole="MecanismoDeContacto" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioID" />
+    </Key>
+    <Property Name="UsuarioID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contrasenna" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rol" Type="Byte" Nullable="false" />
+    <Property Name="Becado" Type="Boolean" Nullable="false" />
+    <Property Name="Permisos" Type="Boolean" Nullable="false" />
+    <Property Name="PersonaID" Type="Int64" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK__Usuario__FK_Pers__2FCF1A8A" FromRole="Usuario" ToRole="Persona" />
+  </EntityType>
+  <Association Name="FK_Persona_Genero">
+    <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genero">
+        <PropertyRef Name="GeneroID" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="GeneroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdentificadorPersona_Persona">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="IdentificadorPersona" Type="Self.IdentificadorPersona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="IdentificadorPersona">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdentificadorPersona_TipoIdentificadorPersona">
+    <End Role="TipoIdentificadorPersona" Type="Self.TipoIdentificadorPersona" Multiplicity="1" />
+    <End Role="IdentificadorPersona" Type="Self.IdentificadorPersona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoIdentificadorPersona">
+        <PropertyRef Name="TipoIdentificadorPersonaID" />
+      </Principal>
+      <Dependent Role="IdentificadorPersona">
+        <PropertyRef Name="TipoIdentificadorPersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_Persons">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_TipoDeTelefono">
+    <End Role="TipoDeTelefono" Type="Self.TipoDeTelefono" Multiplicity="0..1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDeTelefono">
+        <PropertyRef Name="TipoDeTelefonoID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="TipoDeTelefonoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MecanismoDeContacto_TipoMecanismoDeContacto">
+    <End Role="TipoMecanismoDeContacto" Type="Self.TipoMecanismoDeContacto" Multiplicity="1" />
+    <End Role="MecanismoDeContacto" Type="Self.MecanismoDeContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMecanismoDeContacto">
+        <PropertyRef Name="TipoMecanismoDeContactoID" />
+      </Principal>
+      <Dependent Role="MecanismoDeContacto">
+        <PropertyRef Name="TipoMecanismoDeContactoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Nacionalidad">
+    <End Role="Nacionalidad" Type="Self.Nacionalidad" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nacionalidad">
+        <PropertyRef Name="NacionalidadID" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="NacionalidadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario__FK_Pers__2FCF1A8A">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaID" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="PersonaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UsuariosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Genero" EntityType="Self.Genero" />
+    <EntitySet Name="IdentificadorPersona" EntityType="Self.IdentificadorPersona" />
+    <EntitySet Name="MecanismoDeContacto" EntityType="Self.MecanismoDeContacto" />
+    <EntitySet Name="Nacionalidad" EntityType="Self.Nacionalidad" />
+    <EntitySet Name="Persona" EntityType="Self.Persona" />
+    <EntitySet Name="TipoDeTelefono" EntityType="Self.TipoDeTelefono" />
+    <EntitySet Name="TipoIdentificadorPersona" EntityType="Self.TipoIdentificadorPersona" />
+    <EntitySet Name="TipoMecanismoDeContacto" EntityType="Self.TipoMecanismoDeContacto" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK_Persona_Genero" Association="Self.FK_Persona_Genero">
+      <End Role="Genero" EntitySet="Genero" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdentificadorPersona_Persona" Association="Self.FK_IdentificadorPersona_Persona">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="IdentificadorPersona" EntitySet="IdentificadorPersona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdentificadorPersona_TipoIdentificadorPersona" Association="Self.FK_IdentificadorPersona_TipoIdentificadorPersona">
+      <End Role="TipoIdentificadorPersona" EntitySet="TipoIdentificadorPersona" />
+      <End Role="IdentificadorPersona" EntitySet="IdentificadorPersona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_Persons" Association="Self.FK_MecanismoDeContacto_Persons">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_TipoDeTelefono" Association="Self.FK_MecanismoDeContacto_TipoDeTelefono">
+      <End Role="TipoDeTelefono" EntitySet="TipoDeTelefono" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MecanismoDeContacto_TipoMecanismoDeContacto" Association="Self.FK_MecanismoDeContacto_TipoMecanismoDeContacto">
+      <End Role="TipoMecanismoDeContacto" EntitySet="TipoMecanismoDeContacto" />
+      <End Role="MecanismoDeContacto" EntitySet="MecanismoDeContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Nacionalidad" Association="Self.FK_Persona_Nacionalidad">
+      <End Role="Nacionalidad" EntitySet="Nacionalidad" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuario__FK_Pers__2FCF1A8A" Association="Self.FK__Usuario__FK_Pers__2FCF1A8A">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <FunctionImport Name="ActualizarBeca">
+      <Parameter Name="ID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarUsuario" ReturnType="Collection(UsuariosModel.ConsultarUsuario_Result)">
+      <Parameter Name="Correo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConsultarUsuario_ID" ReturnType="Collection(UsuariosModel.ConsultarUsuario_ID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarUsuario">
+      <Parameter Name="UsuarioID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Insertar_Usuario">
+      <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Contrasena" Mode="In" Type="String" />
+      <Parameter Name="Rol" Mode="In" Type="Byte" />
+      <Parameter Name="Becado" Mode="In" Type="Boolean" />
+      <Parameter Name="Permisos" Mode="In" Type="Boolean" />
+      <Parameter Name="PrimerN" Mode="In" Type="String" />
+      <Parameter Name="PrimerA" Mode="In" Type="String" />
+      <Parameter Name="SegundoN" Mode="In" Type="String" />
+      <Parameter Name="SegundoA" Mode="In" Type="String" />
+      <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+      <Parameter Name="LugarNacimiento" Mode="In" Type="String" />
+      <Parameter Name="GeneroID" Mode="In" Type="Byte" />
+      <Parameter Name="Nacionalidad" Mode="In" Type="Byte" />
+      <Parameter Name="ValorID" Mode="In" Type="String" />
+      <Parameter Name="TipoID" Mode="In" Type="Byte" />
+      <Parameter Name="ValorContacto" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarBecados" ReturnType="Collection(UsuariosModel.ListarBecados_Result)" />
+    <FunctionImport Name="ListarNoBecados" ReturnType="Collection(UsuariosModel.ListarNoBecados_Result)" />
+    <FunctionImport Name="ListarNoBecadosID" ReturnType="Collection(UsuariosModel.ListarNoBecadosID_Result)">
+      <Parameter Name="ID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarNoBecadosNombre" ReturnType="Collection(UsuariosModel.ListarNoBecadosNombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarUsuarios" ReturnType="Collection(UsuariosModel.ListarUsuarios_Result)" />
+    <FunctionImport Name="ModificarUsuario">
+      <Parameter Name="UsuarioID" Mode="In" Type="Int64" />
+      <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
+      <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+      <Parameter Name="Contrasenna" Mode="In" Type="String" />
+      <Parameter Name="Rol" Mode="In" Type="Byte" />
+      <Parameter Name="Becado" Mode="In" Type="Boolean" />
+      <Parameter Name="Permisos" Mode="In" Type="Boolean" />
+      <Parameter Name="PrimerNombre" Mode="In" Type="String" />
+      <Parameter Name="PrimerApellido" Mode="In" Type="String" />
+      <Parameter Name="SegundoApellido" Mode="In" Type="String" />
+      <Parameter Name="SegundoNombre" Mode="In" Type="String" />
+      <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+      <Parameter Name="LugarNacimiento" Mode="In" Type="String" />
+      <Parameter Name="GeneroID" Mode="In" Type="Byte" />
+      <Parameter Name="Nacionalidad" Mode="In" Type="Byte" />
+      <Parameter Name="ValorID" Mode="In" Type="String" />
+      <Parameter Name="TipoID" Mode="In" Type="Byte" />
+      <Parameter Name="ValorContacto" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarEstudiantes" ReturnType="Collection(UsuariosModel.ListarEstudiantes_Result)" />
+    <FunctionImport Name="ListarEstudiantesID" ReturnType="Collection(UsuariosModel.ListarEstudiantesID_Result)">
+      <Parameter Name="ID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarEstudiantesNombre" ReturnType="Collection(UsuariosModel.ListarEstudiantesNombre_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="BuscarEstudiante" ReturnType="Collection(UsuariosModel.BuscarEstudiante_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Ingresar" ReturnType="Collection(UsuariosModel.Ingresar_Result)">
+      <Parameter Name="Correo" Mode="In" Type="String" />
+      <Parameter Name="Contra" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ConsultarUsuario_Result">
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Byte" Name="Rol" Nullable="false" />
+    <Property Type="Boolean" Name="Permisos" Nullable="false" />
+    <Property Type="String" Name="CorreoElectronico" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ConsultarUsuario_ID_Result">
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+    <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CorreoElectronico" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contrasenna" Nullable="false" MaxLength="50" />
+    <Property Type="Byte" Name="Rol" Nullable="false" />
+    <Property Type="Boolean" Name="Becado" Nullable="false" />
+    <Property Type="Boolean" Name="Permisos" Nullable="false" />
+    <Property Type="Byte" Name="GeneroID" Nullable="true" />
+    <Property Type="String" Name="ValorID" Nullable="false" MaxLength="100" />
+    <Property Type="Byte" Name="TipoIdentificadorPersonaID" Nullable="false" />
+    <Property Type="String" Name="ValorContacto" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ListarBecados_Result">
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ListarNoBecados_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ListarNoBecadosID_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ListarNoBecadosNombre_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="false" />
+    <Property Type="String" Name="PrimerNombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PrimerApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SegundoApellido" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ListarUsuarios_Result">
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Byte" Name="Rol" Nullable="false" />
+    <Property Type="Boolean" Name="Permisos" Nullable="false" />
+    <Property Type="String" Name="CorreoElectronico" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ListarEstudiantes_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Becado" Nullable="false" />
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListarEstudiantesID_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Becado" Nullable="false" />
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListarEstudiantesNombre_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Becado" Nullable="false" />
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="BuscarEstudiante_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="203" />
+    <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Becado" Nullable="false" />
+    <Property Type="Int64" Name="UsuarioID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Ingresar_Result">
+    <Property Type="Int64" Name="PersonaID" Nullable="true" />
+    <Property Type="Byte" Name="Rol" Nullable="false" />
+    <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="Permisos" Nullable="false" />
+  </ComplexType>
+</Schema>

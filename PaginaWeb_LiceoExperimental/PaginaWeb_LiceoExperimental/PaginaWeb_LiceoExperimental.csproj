@@ -1,0 +1,887 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{76835968-6CC5-46B1-AF16-0C3665147F42}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PaginaWeb_LiceoExperimental</RootNamespace>
+    <AssemblyName>PaginaWeb_LiceoExperimental</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44305</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CocinaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CocinaModel.edmx</DependentUpon>
+      <LastGenOutput>CocinaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CocinaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CocinaModel.edmx</DependentUpon>
+      <LastGenOutput>CocinaModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Cocina\FormularioPlatillo.aspx" />
+    <Content Include="Cocina\ImprimirReserva.aspx" />
+    <Content Include="Cocina\ListaAlmuerzos.aspx" />
+    <Content Include="Cocina\Detalles.aspx" />
+    <Content Include="Cocina\ListaPago.aspx" />
+    <Content Include="Cocina\ListaReservas.aspx" />
+    <Content Include="Cocina\Menu.aspx" />
+    <Content Include="Cocina\ReservaAdmin.aspx" />
+    <Content Include="Cocina\Reserva.aspx" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\daterangepicker.css" />
+    <Content Include="Content\hopscotch.css" />
+    <Content Include="Content\hopscotch.min.css" />
+    <Content Include="CSS\Estilo.css" />
+    <Content Include="EventosModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventosModel.edmx</DependentUpon>
+      <LastGenOutput>EventosModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EventosModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventosModel.edmx</DependentUpon>
+      <LastGenOutput>EventosModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Eventos\AdministrarEventos.aspx" />
+    <Content Include="Eventos\DetallesEvento.aspx" />
+    <Content Include="Eventos\Eventos.aspx" />
+    <Content Include="Eventos\FormularioEvento.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Imagenes\Almuerzos.png" />
+    <Content Include="Imagenes\Eventos.png" />
+    <Content Include="Imagenes\Login.png" />
+    <Content Include="Imagenes\Logo.png" />
+    <Content Include="Imagenes\Logoff.png" />
+    <Content Include="Imagenes\Noticias.png" />
+    <Content Include="Imagenes\Profesor.png" />
+    <Content Include="Imagenes\Tog.png" />
+    <Content Include="Imagenes\User.png" />
+    <Content Include="Imagenes\Usuarios.png" />
+    <Content Include="Inicio.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="NoticiasModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NoticiasModel.edmx</DependentUpon>
+      <LastGenOutput>NoticiasModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="NoticiasModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NoticiasModel.edmx</DependentUpon>
+      <LastGenOutput>NoticiasModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Noticias\AdministrarNoticias.aspx" />
+    <Content Include="Noticias\DetallesNoticia.aspx" />
+    <Content Include="Noticias\FormularioNoticia.aspx" />
+    <Content Include="Noticias\Noticias.aspx" />
+    <Content Include="ProfesoresModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProfesoresModel.edmx</DependentUpon>
+      <LastGenOutput>ProfesoresModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ProfesoresModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProfesoresModel.edmx</DependentUpon>
+      <LastGenOutput>ProfesoresModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Profes\AdministrarProfesores.aspx" />
+    <Content Include="Profes\AdministrarSecciones.aspx" />
+    <Content Include="Profes\DetallesProfesor.aspx" />
+    <Content Include="Profes\DetallesSeccion.aspx" />
+    <Content Include="Profes\FormularioProfesor.aspx" />
+    <Content Include="Profes\FormularioSeccion.aspx" />
+    <Content Include="Profes\Profes.aspx" />
+    <Content Include="Resgistro.aspx" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\daterangepicker.js" />
+    <Content Include="Scripts\hopscotch.js" />
+    <Content Include="Scripts\hopscotch.min.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="UsuariosModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UsuariosModel.edmx</DependentUpon>
+      <LastGenOutput>UsuariosModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="UsuariosModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UsuariosModel.edmx</DependentUpon>
+      <LastGenOutput>UsuariosModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Usuarios\Becas.aspx" />
+    <Content Include="Usuarios\FormularioUsuario.aspx" />
+    <Content Include="Usuarios\ListaUsuarios.aspx" />
+    <Content Include="Usuarios\PaginaInicial.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BuscarEstudiante_Result.cs">
+      <DependentUpon>UsuariosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriaPlatillo.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CocinaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CocinaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CocinaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CocinaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CocinaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Cocina\DatosCocina.cs" />
+    <Compile Include="Cocina\FormularioPlatillo.aspx.cs">
+      <DependentUpon>FormularioPlatillo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cocina\FormularioPlatillo.aspx.designer.cs">
+      <DependentUpon>FormularioPlatillo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cocina\ImprimirReserva.aspx.cs">
+      <DependentUpon>ImprimirReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cocina\ImprimirReserva.aspx.designer.cs">
+      <DependentUpon>ImprimirReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cocina\ListaAlmuerzos.aspx.cs">
+      <DependentUpon>ListaAlmuerzos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cocina\ListaAlmuerzos.aspx.designer.cs">
+      <DependentUpon>ListaAlmuerzos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cocina\ListaPago.aspx.cs">
+      <DependentUpon>ListaPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cocina\ListaPago.aspx.designer.cs">
+      <DependentUpon>ListaPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cocina\ListaReservas.aspx.cs">
+      <DependentUpon>ListaReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cocina\ListaReservas.aspx.designer.cs">
+      <DependentUpon>ListaReservas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cocina\LogicaCocina.cs" />
+    <Compile Include="Cocina\Menu.aspx.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cocina\Menu.aspx.designer.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cocina\NavCocina.Master.cs">
+      <DependentUpon>NavCocina.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cocina\NavCocina.Master.designer.cs">
+      <DependentUpon>NavCocina.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Cocina\Detalles.aspx.cs">
+      <DependentUpon>Detalles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cocina\Detalles.aspx.designer.cs">
+      <DependentUpon>Detalles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cocina\ReservaAdmin.aspx.cs">
+      <DependentUpon>ReservaAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cocina\ReservaAdmin.aspx.designer.cs">
+      <DependentUpon>ReservaAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cocina\Reserva.aspx.cs">
+      <DependentUpon>Reserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cocina\Reserva.aspx.designer.cs">
+      <DependentUpon>Reserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarEvento_ID_Result.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarEvento_PorFecha_Result.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarEvento_PorNombre_Result.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarNoticia_ID_Result.cs">
+      <DependentUpon>NoticiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarNoticia_PorFecha_Result.cs">
+      <DependentUpon>NoticiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarNoticia_PorTitulo_Result.cs">
+      <DependentUpon>NoticiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarPlatoDia_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarProfesor_ID_Result.cs">
+      <DependentUpon>ProfesoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarProfesor_Nombre_Result.cs">
+      <DependentUpon>ProfesoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarReservasPorID_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarReservas_PorFecha_Pendientes_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarReservas_PorNombre_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarSeccion_Descripcion_Result.cs">
+      <DependentUpon>ProfesoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarSeccion_ID_Result.cs">
+      <DependentUpon>ProfesoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarUsuario_ID_Result.cs">
+      <DependentUpon>UsuariosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarUsuario_Result.cs">
+      <DependentUpon>UsuariosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatosUsuario.cs" />
+    <Compile Include="Direccion.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evento.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventosModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventosModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventosModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventosModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventosModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Eventos\AdministrarEventos.aspx.cs">
+      <DependentUpon>AdministrarEventos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Eventos\AdministrarEventos.aspx.designer.cs">
+      <DependentUpon>AdministrarEventos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Eventos\DatosEventos.cs" />
+    <Compile Include="Eventos\DetallesEvento.aspx.cs">
+      <DependentUpon>DetallesEvento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Eventos\DetallesEvento.aspx.designer.cs">
+      <DependentUpon>DetallesEvento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Eventos\Eventos.aspx.cs">
+      <DependentUpon>Eventos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Eventos\Eventos.aspx.designer.cs">
+      <DependentUpon>Eventos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Eventos\FormularioEvento.aspx.cs">
+      <DependentUpon>FormularioEvento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Eventos\FormularioEvento.aspx.designer.cs">
+      <DependentUpon>FormularioEvento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Eventos\LogicaEventos.cs" />
+    <Compile Include="Eventos\NavEventos.Master.cs">
+      <DependentUpon>NavEventos.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Eventos\NavEventos.Master.designer.cs">
+      <DependentUpon>NavEventos.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Genero.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="IdentificadorPersona.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ingresar_Result.cs">
+      <DependentUpon>UsuariosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio.aspx.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LineaEvento.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LineaNoticia.cs">
+      <DependentUpon>NoticiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarBecados_Result.cs">
+      <DependentUpon>UsuariosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListaReserva_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarEstudiantesID_Result.cs">
+      <DependentUpon>UsuariosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarEstudiantesNombre_Result.cs">
+      <DependentUpon>UsuariosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarEstudiantes_Result.cs">
+      <DependentUpon>UsuariosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarEventos_Result.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarNoBecados2_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarNoBecadosID_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarNoBecadosNombre_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarNoBecados_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarNoticias_Result.cs">
+      <DependentUpon>NoticiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarProfesores_Result.cs">
+      <DependentUpon>ProfesoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarProfesor_PorNombre_Result.cs">
+      <DependentUpon>ProfesoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarSecciones_Result.cs">
+      <DependentUpon>ProfesoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarTodasNoticias_Result.cs">
+      <DependentUpon>NoticiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarTodosEventos_Result.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarUsuarios_Result.cs">
+      <DependentUpon>UsuariosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogicaUsuario.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MecanismoDeContacto.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Moneda.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Nacionalidad.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NavFoot.Master.cs">
+      <DependentUpon>NavFoot.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavFoot.Master.designer.cs">
+      <DependentUpon>NavFoot.Master</DependentUpon>
+    </Compile>
+    <Compile Include="NavInicio.Master.cs">
+      <DependentUpon>NavInicio.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavInicio.Master.designer.cs">
+      <DependentUpon>NavInicio.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Noticia.cs">
+      <DependentUpon>NoticiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NoticiasModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoticiasModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NoticiasModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoticiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NoticiasModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoticiasModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Noticias\AdministrarNoticias.aspx.cs">
+      <DependentUpon>AdministrarNoticias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Noticias\AdministrarNoticias.aspx.designer.cs">
+      <DependentUpon>AdministrarNoticias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Noticias\DatosNoticias.cs" />
+    <Compile Include="Noticias\DetallesNoticia.aspx.cs">
+      <DependentUpon>DetallesNoticia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Noticias\DetallesNoticia.aspx.designer.cs">
+      <DependentUpon>DetallesNoticia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Noticias\FormularioNoticia.aspx.cs">
+      <DependentUpon>FormularioNoticia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Noticias\FormularioNoticia.aspx.designer.cs">
+      <DependentUpon>FormularioNoticia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Noticias\LogicaNoticias.cs" />
+    <Compile Include="Noticias\NavNoticias.Master.cs">
+      <DependentUpon>NavNoticias.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Noticias\NavNoticias.Master.designer.cs">
+      <DependentUpon>NavNoticias.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Noticias\Noticias.aspx.cs">
+      <DependentUpon>Noticias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Noticias\Noticias.aspx.designer.cs">
+      <DependentUpon>Noticias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Participante.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persona.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Platillo.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlatilloDia.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Precio.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Prioridad.cs">
+      <DependentUpon>NoticiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Profesores.cs">
+      <DependentUpon>ProfesoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfesoresModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProfesoresModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfesoresModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProfesoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfesoresModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProfesoresModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Profes\AdministrarProfesores.aspx.cs">
+      <DependentUpon>AdministrarProfesores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profes\AdministrarProfesores.aspx.designer.cs">
+      <DependentUpon>AdministrarProfesores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profes\AdministrarSecciones.aspx.cs">
+      <DependentUpon>AdministrarSecciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profes\AdministrarSecciones.aspx.designer.cs">
+      <DependentUpon>AdministrarSecciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profes\DatosProfesores.cs" />
+    <Compile Include="Profes\DetallesProfesor.aspx.cs">
+      <DependentUpon>DetallesProfesor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profes\DetallesProfesor.aspx.designer.cs">
+      <DependentUpon>DetallesProfesor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profes\DetallesSeccion.aspx.cs">
+      <DependentUpon>DetallesSeccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profes\DetallesSeccion.aspx.designer.cs">
+      <DependentUpon>DetallesSeccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profes\FormularioProfesor.aspx.cs">
+      <DependentUpon>FormularioProfesor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profes\FormularioProfesor.aspx.designer.cs">
+      <DependentUpon>FormularioProfesor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profes\FormularioSeccion.aspx.cs">
+      <DependentUpon>FormularioSeccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profes\FormularioSeccion.aspx.designer.cs">
+      <DependentUpon>FormularioSeccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profes\LogicaProfesores.cs" />
+    <Compile Include="Profes\NavProfesores.Master.cs">
+      <DependentUpon>NavProfesores.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profes\NavProfesores.Master.designer.cs">
+      <DependentUpon>NavProfesores.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Profes\Profes.aspx.cs">
+      <DependentUpon>Profes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profes\Profes.aspx.designer.cs">
+      <DependentUpon>Profes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reserva.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Resgistro.aspx.cs">
+      <DependentUpon>Resgistro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Resgistro.aspx.designer.cs">
+      <DependentUpon>Resgistro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seccion.cs">
+      <DependentUpon>ProfesoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoCambio.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoDeTelefono.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoDireccion.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoIdentificadorPersona.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoMecanismoDeContacto.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoUbicacionGeografica.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UbicacionGeografica.cs">
+      <DependentUpon>EventosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuariosModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsuariosModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuariosModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsuariosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuariosModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsuariosModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios\Becas.aspx.cs">
+      <DependentUpon>Becas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios\Becas.aspx.designer.cs">
+      <DependentUpon>Becas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios\DatosAdminUsuarios.cs" />
+    <Compile Include="Usuarios\FormularioUsuario.aspx.cs">
+      <DependentUpon>FormularioUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios\FormularioUsuario.aspx.designer.cs">
+      <DependentUpon>FormularioUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios\ListaUsuarios.aspx.cs">
+      <DependentUpon>ListaUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios\ListaUsuarios.aspx.designer.cs">
+      <DependentUpon>ListaUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios\LogicaAdminUsuarios.cs" />
+    <Compile Include="Usuarios\NavUsuarios.Master.cs">
+      <DependentUpon>NavUsuarios.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios\NavUsuarios.Master.designer.cs">
+      <DependentUpon>NavUsuarios.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios\PaginaInicial.aspx.cs">
+      <DependentUpon>PaginaInicial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios\PaginaInicial.aspx.designer.cs">
+      <DependentUpon>PaginaInicial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerificarPlatoDia_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerificarReserva_Result.cs">
+      <DependentUpon>CocinaModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="NavFoot.Master" />
+    <Content Include="Cocina\NavCocina.Master" />
+    <Content Include="NavInicio.Master" />
+    <Content Include="Eventos\NavEventos.Master" />
+    <Content Include="Noticias\NavNoticias.Master" />
+    <EntityDeploy Include="CocinaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CocinaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="CocinaModel.edmx.diagram">
+      <DependentUpon>CocinaModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="EventosModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EventosModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EventosModel.edmx.diagram">
+      <DependentUpon>EventosModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="NoticiasModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NoticiasModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="NoticiasModel.edmx.diagram">
+      <DependentUpon>NoticiasModel.edmx</DependentUpon>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Usuarios\NavUsuarios.Master" />
+    <Content Include="Profes\NavProfesores.Master" />
+    <EntityDeploy Include="ProfesoresModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProfesoresModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ProfesoresModel.edmx.diagram">
+      <DependentUpon>ProfesoresModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\experimentalweb-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\experimentalweb-001-site1 - Web Deploy.pubxml" />
+    <EntityDeploy Include="UsuariosModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UsuariosModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="UsuariosModel.edmx.diagram">
+      <DependentUpon>UsuariosModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\typings\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50127</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44305/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
